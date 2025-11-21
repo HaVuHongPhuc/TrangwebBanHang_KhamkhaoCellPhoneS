@@ -1,0 +1,146 @@
+﻿@model TrangwebCellPhoneS.Models.ViewModel.CheckoutVM
+@{
+    ViewBag.Title = "Checkout";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@* CSS để làm các thành phần "bự ra" *@
+<style>
+    .card-header-red {
+        background-color: #dc3545;
+        color: white;
+    }
+
+    .checkout-card {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        border: none;
+        margin-top: 20px;
+    }
+
+    .form-check {
+        margin-bottom: 0.75rem;
+    }
+
+    /* Tăng kích thước font cho các label trong form */
+    .form-label, .form-check-label {
+        font-size: 1.05rem;
+    }
+
+    /* Tăng kích thước font cho input */
+    .form-control {
+        font-size: 1.05rem;
+        padding: 0.5rem 0.75rem;
+    }
+
+    .card-body {
+        padding: 1.5rem;
+    }
+
+    /* Tăng kích thước cho phần hiển thị tổng tiền */
+    .total-amount-display h4 {
+        font-size: 1.5rem; /* Làm cho chữ "Tổng cộng" và số tiền bự hơn */
+    }
+</style>
+
+
+<h2>ĐẶT HÀNG</h2>
+
+@using (Html.BeginForm("Checkout", "Order", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    @* Căn giữa cột col-lg-10 *@
+    <div class="row justify-content-center">
+
+        @* Tăng độ rộng cột này lên col-lg-10 *@
+        <div class="col-lg-10">
+            <div class="card checkout-card">
+                <div class="card-header card-header-red">
+                    <h4 class="mb-0">Thông tin giao hàng & Thanh toán</h4>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            @Html.LabelFor(m => m.ShippingAddress, "Địa chỉ giao hàng", new { @class = "form-label fw-bold" })
+                            <button type="button" class="btn btn-link btn-sm text-danger" onclick="enableAddressEdit()">Chỉnh sửa</button>
+                        </div>
+                        @Html.TextBoxFor(m => m.ShippingAddress, new { @class = "form-control", @readonly = "readonly", @id = "shippingAddress" })
+                    </div>
+
+                    <div class="mb-3" id="newAddressGroup" style="display:none;">
+                        <label class="form-label text-danger">Nhập địa chỉ mới:</label>
+                        <input type="text" id="newShippingAddress" class="form-control" placeholder="Nhập địa chỉ giao hàng cụ thể..." />
+                    </div>
+
+                    <div class="mb-3" id="newAddressGroup" style="display:none;">
+                        @Html.Label("Địa chỉ mới", new { @class = "form-label" })
+                        <input type="text" id="newShippingAddress" class="form-control" placeholder="Nhập địa chỉ mới của bạn..." />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Phương thức giao hàng</label>
+                        <div class="form-check">
+                            @Html.RadioButtonFor(m => m.ShippingMethod, "Giao hàng nhanh", new { @class = "form-check-input", id = "ship-fast" })
+                            <label class="form-check-label" for="ship-fast">Giao hàng nhanh</label>
+                        </div>
+                        <div class="form-check">
+                            @Html.RadioButtonFor(m => m.ShippingMethod, "Giao hàng tiết kiệm", new { @class = "form-check-input", id = "ship-eco" })
+                            <label class="form-check-label" for="ship-eco">Giao hàng tiết kiệm</label>
+                        </div>
+                        @Html.ValidationMessageFor(m => m.ShippingMethod, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Phương thức thanh toán</label>
+                        <div class="form-check">
+                            @Html.RadioButtonFor(m => m.PaymentMethod, "Tiền mặt", new { @class = "form-check-input", id = "pay-cod" })
+                            <label class="form-check-label" for="pay-cod">Tiền mặt (COD)</label>
+                        </div>
+                        <div class="form-check">
+                            @Html.RadioButtonFor(m => m.PaymentMethod, "Paypal", new { @class = "form-check-input", id = "pay-paypal" })
+                            <label class="form-check-label" for="pay-paypal">Paypal</label>
+                        </div>
+                        <div class="form-check">
+                            @Html.RadioButtonFor(m => m.PaymentMethod, "Mua trước trả sau", new { @class = "form-check-input", id = "pay-later" })
+                            <label class="form-check-label" for="pay-later">Mua trước trả sau</label>
+                        </div>
+                        @Html.ValidationMessageFor(m => m.PaymentMethod, "", new { @class = "text-danger" })
+                    </div>
+                    @Html.ValidationMessageFor(m => m.PaymentMethod, "", new { @class = "text-danger" })
+                </div>
+
+                    <hr />
+
+                    <div class="d-flex justify-content-between align-items-center mb-3 total-amount-display">
+                        <h4 class="text-dark fw-bold">Tổng cộng:</h4>
+                        <h4 class="text-danger fw-bold">@Model.TotalAmount.ToString("N0") VNĐ</h4>
+                    </div>
+
+                    @Html.HiddenFor(m => m.TotalAmount)
+
+                    <div class="d-grid mt-4">
+                        <input type="submit" value="HOÀN TẤT ĐẶT HÀNG" class="btn btn-danger btn-lg" onclick="updateShippingAddress()" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+}
+
+@section Scripts {
+    <script>
+        function enableAddressEdit() {
+            document.getElementById("shippingAddress").removeAttribute("readonly");
+            document.getElementById("newAddressGroup").style.display = "block";
+            document.getElementById("newShippingAddress").focus();
+        }
+
+        function updateShippingAddress() {
+            var newAddress = document.getElementById("newShippingAddress").value;
+            if (newAddress.trim() !== "") {
+                document.getElementById("shippingAddress").value = newAddress;
+            }
+        }
+    </script>
+}
+

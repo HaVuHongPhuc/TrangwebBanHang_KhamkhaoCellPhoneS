@@ -1,0 +1,100 @@
+﻿@model TrangwebCellPhoneS.Models.ViewModel.Cart
+@{
+    ViewBag.Title = "Giỏ hàng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    <link rel="stylesheet" type="text/css" href="~/Content/SanPham.css" />
+}
+
+<script language="JavaScript">
+    function cartUpdateQuantity(id, newQuantity) {
+        if (newQuantity < 1) return;
+
+        const form = document.createElement('form');
+        form.method = 'post';
+        form.action = '@Url.Action("UpdateQuantity", "Cart")';
+
+        const idInput = document.createElement('input');
+        idInput.type = 'hidden';
+        idInput.name = 'id';
+        idInput.value = id;
+        form.appendChild(idInput);
+
+        const quantityInput = document.createElement('input');
+        quantityInput.type = 'hidden';
+        quantityInput.name = 'quantity';
+        quantityInput.value = newQuantity;
+        form.appendChild(quantityInput);
+
+        document.body.appendChild(form);
+        form.submit();
+    }
+</script>
+
+<main class="cart-page">
+    <div class="cart-container">
+        @if (Model == null || !Model.Items.Any())
+        {
+            <div class="cart-items" style="text-align: center; padding: 50px;">
+                <i class="fa-solid fa-cart-arrow-down" style="font-size: 50px; color: #ddd; margin-bottom: 15px;"></i>
+                <p>Giỏ hàng của bạn đang trống</p>
+                <a href="@Url.Action("Index", "Home")" class="checkout-btn" style="width: 200px; margin: 0 auto;">Tiếp tục mua sắm</a>
+            </div>
+        }
+        else
+        {
+            <div class="cart-items">
+                <div class="cart-header">
+                    <h2>Giỏ hàng (@Model.Items.Sum(x => x.Quantity) sản phẩm)</h2>
+                    <a href="@Url.Action("ClearCart", "Cart")" class="btn-clear-cart">Xóa tất cả</a>
+                </div>
+
+                @foreach (var item in Model.Items)
+                {
+                    <div class="cart-item">
+                        <img src="@item.ProductImage" alt="@item.ProductName" class="cart-img" />
+
+                        <div class="cart-info">
+                            <a href="@Url.Action("ProductDetails", "Home", new { id = item.ProductID })" class="cart-name">
+                                @item.ProductName
+                            </a>
+                            <p class="cart-price">@item.UnitPrice.ToString("N0")₫</p>
+
+                            <div class="cart-qty">
+                                <button type="button" class="btn-qty" onclick="cartUpdateQuantity(@item.ProductID, @item.Quantity - 1)">-</button>
+                                <input type="text" class="input-qty" value="@item.Quantity" readonly />
+                                <button type="button" class="btn-qty" onclick="cartUpdateQuantity(@item.ProductID, @item.Quantity + 1)">+</button>
+                            </div>
+                        </div>
+
+                        <a href="@Url.Action("RemoveFromCart", "Cart", new { id = item.ProductID })" class="remove-btn">Xóa</a>
+                    </div>
+                }
+            </div>
+
+            <div class="cart-summary">
+                <h3 style="font-weight:bold; margin-top:0;">THÔNG TIN ĐƠN HÀNG</h3>
+                f
+                <div class="summary-row">
+                    <span>Tạm tính:</span>
+                    <span>@Model.TotalValue().ToString("N0")₫</span>
+                </div>
+                <div class="summary-row">
+                    <span>Giảm giá:</span>
+                    <span>0₫</span>
+                </div>
+
+                <div class="summary-row total-row">
+                    <span>TỔNG TIỀN:</span>
+                    <span class="total-price">@Model.TotalValue().ToString("N0")₫</span>
+                </div>
+                <p style="font-size: 12px; color: #666; text-align: right;">(Đã bao gồm VAT)</p>
+
+                <a href="@Url.Action("Shipping", "Order")" class="checkout-btn">Nhập thông tin giao hàng</a>
+
+                <a href="@Url.Action("Index", "Home")" style="display:block; text-align:center; margin-top:10px; text-decoration:none; color:#d70018;">
+                    <i class="fa-solid fa-arrow-left"></i> Tiếp tục mua hàng
+                </a>
+            </div>
+        }
+    </div>
+</main>

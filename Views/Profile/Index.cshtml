@@ -1,0 +1,306 @@
+﻿@model TrangwebCellPhoneS.Models.ViewModel.ProfileVM
+@{
+    ViewBag.Title = "Thông tin tài khoản";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    /* CSS Style giống Tiki */
+    .profile-page {
+        background-color: #f5f5fa;
+        padding: 20px 0;
+        min-height: 600px;
+    }
+
+    .profile-container {
+        display: flex;
+        gap: 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    /* Sidebar trái */
+    .sidebar-profile {
+        width: 250px;
+        background: transparent;
+    }
+
+    .user-brief {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding-left: 10px;
+        margin-bottom: 20px;
+    }
+
+    .user-avatar-small {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: #ddd;
+    }
+
+    .user-brief-name {
+        font-size: 13px;
+        color: #333;
+    }
+
+        .user-brief-name strong {
+            font-size: 16px;
+            display: block;
+        }
+
+    .sidebar-menu-list {
+        list-style: none;
+        padding: 0;
+    }
+
+        .sidebar-menu-list li a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 15px;
+            color: #333;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+            .sidebar-menu-list li a:hover, .sidebar-menu-list li.active a {
+                background: #ebebf0;
+                color: #000;
+            }
+
+    .sidebar-icon {
+        width: 20px;
+        text-align: center;
+        color: #999;
+    }
+
+    /* Nội dung phải */
+    .main-profile {
+        flex: 1;
+        background: white;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    }
+
+    .profile-header {
+        font-size: 18px;
+        margin-bottom: 20px;
+        border-bottom: 1px solid #f0f0f0;
+        padding-bottom: 15px;
+    }
+
+    .profile-form-row {
+        display: flex;
+        gap: 40px;
+    }
+
+    .profile-left-col {
+        flex: 1;
+        border-right: 1px solid #f0f0f0;
+        padding-right: 40px;
+    }
+
+    .profile-right-col {
+        width: 300px;
+        padding-left: 20px;
+    }
+
+    .form-group-row {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .form-label-profile {
+        width: 100px;
+        font-size: 14px;
+        color: #333;
+        text-align: right;
+        margin-right: 20px;
+    }
+
+    .form-input-box {
+        flex: 1;
+    }
+
+    .form-control-tiki {
+        width: 100%;
+        padding: 8px 12px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        outline: none;
+    }
+
+        .form-control-tiki:focus {
+            border-color: #0d5cb6;
+            box-shadow: 0 0 4px rgba(13,92,182,0.1);
+        }
+
+    .avatar-upload {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .avatar-big {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        border: 4px solid #c2e1ff;
+        margin-right: 20px;
+    }
+
+    .btn-save {
+        background: #0d5cb6;
+        color: white;
+        border: none;
+        padding: 10px 30px;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+        .btn-save:hover {
+            background: #004699;
+        }
+
+    .info-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #f0f0f0;
+        padding: 15px 0;
+        font-size: 14px;
+    }
+
+    .info-icon {
+        color: #999;
+        margin-right: 10px;
+    }
+
+    .btn-update {
+        color: #0d5cb6;
+        border: 1px solid #0d5cb6;
+        background: white;
+        padding: 5px 10px;
+        border-radius: 4px;
+        font-size: 13px;
+        text-decoration: none;
+    }
+</style>
+
+<div class="profile-page">
+    <div class="profile-container">
+        <div class="sidebar-profile">
+            <div class="user-brief">
+                <img src="https://e7.pngegg.com/pngimages/84/165/png-clipart-united-states-avatar-organization-information-user-avatar-service-computer-wallpaper-thumbnail.png" class="user-avatar-small" />
+                <div class="user-brief-name">
+                    Tài khoản của
+                    <strong>@Model.CustomerName</strong>
+                </div>
+            </div>
+            <ul class="sidebar-menu-list">
+                <li class="active"><a href="#"><i class="fa-solid fa-user sidebar-icon"></i> Thông tin tài khoản</a></li>
+                <li><a href="@Url.Action("OrderHistory", "Order")"><i class="fa-solid fa-box sidebar-icon"></i> Lịch sử đơn hàng</a></li>
+            </ul>
+        </div>
+
+        <div class="main-profile">
+            <h3 class="profile-header">Thông tin tài khoản</h3>
+
+            @using (Html.BeginForm("Update", "Profile", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+
+                if (TempData["SuccessMessage"] != null)
+                {
+                    <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+                }
+
+                <div class="profile-form-row">
+                    <div class="profile-left-col">
+
+                        <div class="form-group-row">
+                            <label class="form-label-profile">Họ và tên</label>
+                            <div class="form-input-box">
+                                @Html.TextBoxFor(m => m.CustomerName, new { @class = "form-control-tiki", @readonly = "readonly", @style = "background:#f5f5f5" })
+                            </div>
+                        </div>
+                        <div class="form-group-row">
+                            <label class="form-label-profile">Nickname</label>
+                            <div class="form-input-box">
+                                @Html.TextBoxFor(m => m.Username, new { @class = "form-control-tiki" })
+                            </div>
+                        </div>
+
+
+                        <div class="form-group-row">
+                            <label class="form-label-profile">Số điện thoại</label>
+                            <div class="form-input-box">
+                                @Html.TextBoxFor(m => m.CustomerPhone, new { @class = "form-control-tiki", @id = "CustomerPhone" })
+                            </div>
+                        </div>
+
+                        <div class="form-group-row">
+                            <label class="form-label-profile">Email</label>
+                            <div class="form-input-box">
+                                @Html.TextBoxFor(m => m.CustomerEmail, new { @class = "form-control-tiki", @id = "CustomerEmail" })
+                            </div>
+                        </div>
+
+                        <div class="form-group-row">
+                            <label class="form-label-profile">Ngày sinh</label>
+                            <div class="form-input-box">
+                                @Html.TextBoxFor(m => m.CustomerBirthday, "{0:yyyy-MM-dd}", new { @class = "form-control-tiki", @type = "date" })
+                            </div>
+                        </div>
+                        <div class="form-group-row">
+                            <label class="form-label-profile">Giới tính</label>
+                            <div class="form-input-box">
+                                @* Sử dụng DropDownListFor thay vì RadioButton *@
+                                @Html.DropDownListFor(m => m.CustomerGender, new List<SelectListItem>
+                                {
+                                    new SelectListItem { Text = "Nam", Value = "Nam" },
+                                    new SelectListItem { Text = "Nữ", Value = "Nu" },
+                                    new SelectListItem { Text = "Khác", Value = "Khac" }
+                                }, "Chọn giới tính", new { @class = "form-control-tiki" })
+
+
+                            </div>
+                        </div>
+                       <div class="form-group-row">
+                            <label class="form-label-profile"></label>
+                            <button type="submit" class="btn-save">Lưu thay đổi</button>
+                        </div>
+                    </div>
+
+                    <div class="profile-right-col">
+                        <div style="margin-bottom: 15px; font-weight: bold; color: #666;">Số điện thoại và Email</div>
+
+                        <div class="info-item">
+                            <div>
+                                <i class="fa-solid fa-phone info-icon"></i>
+                                <div>
+                                    <strong>Số điện thoại</strong><br>
+                                    @Model.CustomerPhone
+                                </div>
+                            </div>
+                            <button type="button" class="btn-update" onclick="document.getElementById('CustomerPhone').focus()">Cập nhật</button>
+                        </div>
+
+                        <div class="info-item">
+                            <div>
+                                <i class="fa-solid fa-envelope info-icon"></i>
+                                <div>
+                                    <strong>Địa chỉ email</strong><br>
+                                    @(string.IsNullOrEmpty(Model.CustomerEmail) ? "Chưa cập nhật" : Model.CustomerEmail)
+                                </div>
+                            </div>
+                            <button type="button" class="btn-update" onclick="document.getElementById('CustomerEmail').focus()">Cập nhật</button>
+                        </div>                       
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

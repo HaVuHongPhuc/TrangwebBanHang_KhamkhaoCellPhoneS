@@ -1,0 +1,74 @@
+﻿@model TrangwebCellPhoneS.Models.ViewModel.LoginVM
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Đăng Nhập - Smember</title>
+    <link rel="stylesheet" href="~/Content/CPS_LoginandRegister.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+    <style>
+        .text-danger { color: #d70018; font-size: 12px; margin-top: 5px; display: block; }
+        .validation-summary-errors { color: #d70018; font-size: 13px; margin-bottom: 10px; border: 1px solid #d70018; padding: 10px; border-radius: 5px; background: #fff5f5; }
+        .validation-summary-errors ul { list-style: none; padding: 0; margin: 0; }
+    </style>
+</head>
+<body>
+    <div class="loginpage">
+        <div class="uudai">
+            <h2>
+                Nhập hội khách hàng thành viên <strong style="color:red;">SMEMBER</strong><br />
+                Để không bỏ lỡ các ưu đãi hấp dẫn từ CellphoneS
+            </h2>
+            <table class="tableuudai">
+                <tr>
+                    <td><i class="fa-solid fa-gift" style="color:red;"></i> <strong>Chiết khấu đến 5%</strong> khi mua các sản phẩm mua tại CellphoneS</td>
+                </tr>
+                <tr>
+                    <td><i class="fa-solid fa-gift" style="color:red;"></i> <strong>Miễn phí giao hàng</strong> cho thành viên SMEM, SVIP và cho đơn hàng từ 300.000đ</td>
+                </tr>
+                <tr>
+                    <td><i class="fa-solid fa-gift" style="color:red;"></i> Trợ giá thu cũ lên đời <strong>đến 1 triệu</strong></td>
+                </tr>
+                <tr>
+                    <td><i class="fa-solid fa-gift" style="color:red;"></i> <strong>Thăng hạng nhận voucher</strong> đến 300.000đ</td>
+                </tr>
+                <tr>
+                    <td><i class="fa-solid fa-gift" style="color:red;"></i> <strong>Đặc quyền S-Student/S-Teacher</strong> ưu đãi thêm đến 10%</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="login-container">
+            @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "loginform" }))
+            {
+                @Html.AntiForgeryToken()
+
+                <h2><strong>Đăng nhập SMEMBER</strong></h2>
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <label>Tên đăng nhập (Số điện thoại):</label>
+                @Html.TextBoxFor(m => m.Username, new { placeholder = "Nhập số điện thoại/username của bạn" })
+                @Html.ValidationMessageFor(m => m.Username, "", new { @class = "text-danger" })
+
+                <label>Mật khẩu:</label>
+                @Html.PasswordFor(m => m.Password, new { placeholder = "Nhập mật khẩu của bạn" })
+                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+
+                <button type="submit" class="buttonlogin">Đăng Nhập</button>
+                <p>
+                    Bạn chưa có tài khoản? <a href="@Url.Action("Register", "Account")">Đăng ký ngay</a>
+                </p>
+                <br />
+                <a class="forgot" href="@Url.Action("Index", "Home")">Quay lại trang chủ</a>
+            }
+        </div>
+    </div>
+</body>
+</html>

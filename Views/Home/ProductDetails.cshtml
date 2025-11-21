@@ -1,0 +1,100 @@
+﻿@model TrangwebCellPhoneS.Models.ViewModel.ProductDetailsVM
+@{
+    ViewBag.Title = Model.product.ProductName;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    <link rel="stylesheet" type="text/css" href="~/Content/SanPham.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+}
+
+<main class="main">
+    <div style="margin-bottom: 15px; font-size: 14px; color: #666;">
+        Trang chủ / @Model.product.Category.CategoryName / @Model.product.ProductName
+    </div>
+
+    <div class="product-detail">
+        <div class="product-left">
+            <img id="mainProductImage"
+                 src="@Model.product.ProductImage"
+                 alt="@Model.product.ProductName"
+                 class="product-image" />
+
+            <div class="highlight-box">
+                <h3><i class="fa-solid fa-star"></i> TÍNH NĂNG NỔI BẬT</h3>
+                <div style="line-height: 1.6; font-size: 14px;">
+                    @Html.Raw(Model.product.outstandingFeatures.Replace("\n", "<br>• "))
+                </div>
+            </div>
+        </div>
+
+        <div class="product-right">
+            <h2>@Model.product.ProductName</h2>
+
+            <div style="display:flex; align-items:center; gap: 10px; margin-bottom: 10px;">
+                <span class="rating"><i class="fa-solid fa-star"></i> 5.0 (Đã bán: @Model.product.OrderDetails.Count)</span>
+                <span style="color:#ccc">|</span>
+                <span>Thương hiệu: @Model.product.Category.CategoryName</span>
+            </div>
+
+            <div class="price-box">
+                <p class="price">@Model.product.ProductPrice.ToString("N0")₫</p>
+            </div>
+            <div class="promo-banner">
+                <img src="https://cdn2.cellphones.com.vn/insecure/rs:fill:0:120/q:90/plain/https://dashboard.cellphones.com.vn/storage/banner-chien-gia-1.png"
+                     alt="Giá bao rẻ" />
+            </div>
+            <div class="promotion-box">
+                <div class="promo-header">
+                    <i class="fa-solid fa-gift"></i> <strong>Khuyến mãi hấp dẫn</strong>
+                </div>
+
+                <div class="promo-content">
+                    <div class="promo-item">
+                        <span class="promo-number">1</span>
+                        <span>Giảm ngay 15% Tai nghe - Loa khi mua kèm Điện thoại / Laptop <a href="#">Xem chi tiết</a></span>
+                    </div>
+
+                    <div class="promo-note">
+                        <p>
+                            Giảm giá chỉ còn <strong class="text-red">@Model.product.ProductPrice.ToString("N0")₫</strong>
+                            (số lượng có hạn, áp dụng cùng ưu đãi Smember).
+                        </p>
+                        <p>Ngày cuối hotsale chỉ áp dụng thanh toán online 100% hoặc thanh toán trực tiếp tại cửa hàng.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="action-buttons">
+                <a href="@Url.Action("AddToCart", "Cart", new { id = Model.product.ProductID, quantity = 1 })" class="btn-buy">
+                    MUA NGAY <br>
+                    <span style="font-size: 12px; font-weight: normal;">(Giao tận nơi hoặc lấy tại cửa hàng)</span>
+                </a>
+
+                <a href="@Url.Action("AddToCart", "Cart", new { id = Model.product.ProductID, quantity = 1 })" class="btn-cart">
+                    <i class="fa-solid fa-cart-plus"></i>
+                    <span>Thêm vào giỏ</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="specs-container">
+        <h3 style="margin-top:0;">Thông số kỹ thuật</h3>
+        <table class="specs-table">
+            <tr>
+                <td colspan="2" style="background: white;">
+                    @Html.Raw(Model.product.ProductSpecifications.Replace("\n", "<br>").Replace("-", "<hr style='margin:5px 0; border:0; border-top:1px dashed #eee;'>"))
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div style="margin-top: 30px;">
+        @Html.Partial("_PVRelatedProduct", Model)
+    </div>
+
+    <div style="margin-top: 30px;">
+        @* Có thể tái sử dụng Partial Sản phẩm tương tự nhưng đổi Model nếu cần *@
+    </div>
+
+    <script src="~/Content/sanpham.js"></script>
+
+</main>

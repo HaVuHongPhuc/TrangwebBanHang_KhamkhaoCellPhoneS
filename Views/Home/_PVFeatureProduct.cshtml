@@ -1,0 +1,57 @@
+﻿﻿@model TrangwebCellPhoneS.Models.ViewModel.HomeProductVM
+@using PagedList.Mvc;
+
+<link rel="stylesheet" type="text/css" href="~/Content/SanPham.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+@*hiển thị danh sách sản phẩm*@
+@if (Model.FeaturedProducts != null && Model.FeaturedProducts.Any())
+{
+    <section class="container featureProd-section">
+        <div class="feature-header">
+            <h2><i class="fa-solid fa-fire" style="color: white;"></i> SẢN PHẨM NỔI BẬT</h2>
+        </div>
+        <div class="feature-container">
+            @foreach (var product in Model.FeaturedProducts)
+            {
+                <div class="fproduct-item">
+                    <div class="badges">
+                        <span class="badge-installment">Trả góp 0%</span>
+                    </div>
+
+                    <div class="prod-image-wrapper">
+                        <a href="@Url.Action("ProductDetails", "Home", new {id = product.ProductID})">
+                            <img src="@Html.DisplayFor(modelItem => product.ProductImage)" alt="@product.ProductName" />
+                        </a>
+                    </div>
+
+                    <div class="prod-info">
+                        <a href="@Url.Action("ProductDetails", "Home", new {id = product.ProductID})" class="prodName">
+                            @Html.DisplayFor(modelItem => product.ProductName)
+                        </a>
+
+                        <div class="prod-specs">
+                            <span>@Html.DisplayFor(modelItem => product.Category.CategoryName)</span>
+                        </div>
+
+                        <div class="price-box">
+                            <p class="prodPrice">@product.ProductPrice.ToString("N0")₫</p>
+                        </div>
+
+                        <div class="prod-actions">
+                            <div class="rating">
+                                <i class="fa-solid fa-star"></i> 5.0
+                            </div>
+                            <div>
+                                <p class="prodSale">Đã bán:&nbsp; @Html.DisplayFor(modelItem => product.OrderDetails.Count)</p>
+                            </div>
+                            <div class="wishlist">
+                                <span>Yêu thích</span> <i class="fa-regular fa-heart"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </section>
+}

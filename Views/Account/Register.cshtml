@@ -1,0 +1,197 @@
+﻿@model TrangwebCellPhoneS.Models.ViewModel.RegisterVM
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Đăng ký SMEMBER</title>
+
+    <link rel="stylesheet" href="~/Content/CPS_LoginandRegister.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        /* --- CSS MỚI ĐỂ BỐ CỤC BANNER VÀ FORM --- */
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f4f6f8;
+            margin: 0;
+            /* padding: 20px; Xóa padding để banner sát lề hơn */
+        }
+
+        .page-container {
+            display: flex;
+            /* Thay đổi từ center sang space-between để đẩy banner ra hai bên */
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 20px;
+            width: 100%; /* Chiếm toàn bộ chiều rộng màn hình */
+            /* max-width: 1400px; Xóa giới hạn chiều rộng để banner sát góc */
+            padding: 20px; /* Thêm padding cho container để nội dung không dính sát mép trên/dưới */
+        }
+
+        .register {
+            /* Form sẽ tự động chiếm không gian còn lại */
+            flex: 1;
+            background: #fff;
+            padding: 40px; /* Tăng padding bên trong form */
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            /* Đặt chiều rộng tối đa lớn hơn để form to lên */
+            max-width: 800px;
+            /* Đảm bảo form luôn ở giữa khi màn hình rất rộng */
+            margin: 0 auto;
+        }
+
+        .side-banner {
+            flex: 0 0 auto;
+            width: 300px;
+            height: auto;
+            border-radius: 10px;
+            object-fit: cover;
+            display: block;
+        }
+            .page-container {
+                justify-content: center; 
+            }
+        
+
+        .text-danger {
+            color: #d70018;
+            font-size: 12px;
+            margin-top: 4px;
+            display: block;
+        }
+
+        .input-error {
+            border-color: #d70018 !important;
+        }
+
+        .validation-summary-errors {
+            color: #d70018;
+            background: #fff5f5;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #d70018;
+            font-size: 13px;
+        }
+
+        .validation-summary-errors ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="page-container">
+
+        <img src="https://cdn2.cellphones.com.vn/insecure/rs:fill:214:530/q:90/plain/https://media-asset.cellphones.com.vn/page_configs/01K8AK76MB2NCC8QHS16T26ES2.png" alt="Banner trái" class="side-banner left">
+
+        <div class="register">
+            <h1 style="color:red; text-align: center;">Đăng ký trở thành SMEMBER</h1>
+
+            <p style="text-align: center;">Đăng ký bằng tài khoản mạng xã hội</p>
+            <div class="social-buttons">
+                <button class="social google"><i class="fa-brands fa-google"></i> Google</button>
+                <button class="social zalo"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Icon_of_Zalo.svg/1200px-Icon_of_Zalo.svg.png" width="20" style="vertical-align: middle; margin-right: 5px;"> Zalo</button>
+            </div>
+
+            <p style="text-align: center; margin: 20px 0;"><i>Hoặc điền thông tin sau</i></p>
+
+            @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "register-form" }))
+            {
+                @Html.AntiForgeryToken()
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <h3>Thông tin cá nhân</h3>
+                <table class="formtable" style="width: 100%;">
+                    <tr>
+                        <td>
+                            <label>Họ và tên</label><br>
+                            @Html.TextBoxFor(m => m.CustomerName, new { placeholder = "Nhập họ và tên của bạn", style = "width: 95%;" })
+                            @Html.ValidationMessageFor(m => m.CustomerName, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            <label>Ngày sinh</label><br>
+                            @Html.TextBoxFor(m => m.CustomerBirthday, "{0:yyyy-MM-dd}", new { @class = "form-control-tiki", @type = "date",  style = "width: 95%;" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Số điện thoại</label><br>
+                            @Html.TextBoxFor(m => m.CustomerPhone, new { placeholder = "Nhập số điện thoại của bạn", style = "width: 95%;" })
+                            @Html.ValidationMessageFor(m => m.CustomerPhone, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            <label>Email</label><br>
+                            @Html.TextBoxFor(m => m.CustomerEmail, new { placeholder = "Nhập email (không bắt buộc)", style = "width: 95%;" })
+                            @Html.ValidationMessageFor(m => m.CustomerEmail, "", new { @class = "text-danger" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <label>Địa chỉ</label><br>
+                            @Html.TextBoxFor(m => m.CustomerAddress, new { placeholder = "Nhập địa chỉ nhận hàng", style = "width: 98%;" })
+                            @Html.ValidationMessageFor(m => m.CustomerAddress, "", new { @class = "text-danger" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <label>Giới tính</label><br>
+                            <label>@Html.RadioButtonFor(m => m.CustomerGender, "Nam") Nam</label>
+                            <label style="margin-left:15px">@Html.RadioButtonFor(m => m.CustomerGender, "Nu") Nữ</label>
+                            <label style="margin-left:15px">@Html.RadioButtonFor(m => m.CustomerGender, "Khac") Khác</label>
+                        </td>
+                    </tr>
+                </table>
+
+                <h3>Thông tin đăng nhập</h3>
+                <table class="formtable" style="width: 100%;">
+                    <tr>
+                        <td colspan="2">
+                            <label>Tên đăng nhập</label><br>
+                            @Html.TextBoxFor(m => m.Username, new { placeholder = "Nhập tên đăng nhập", style = "width: 98%;" })
+                            @Html.ValidationMessageFor(m => m.Username, "", new { @class = "text-danger" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Mật khẩu</label><br>
+                            @Html.PasswordFor(m => m.Password, new { placeholder = "Nhập mật khẩu", style = "width: 95%;" })
+                            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            <label>Nhập lại mật khẩu</label><br>
+                            @Html.PasswordFor(m => m.ConfirmPassword, new { placeholder = "Nhập lại mật khẩu", style = "width: 95%;" })
+                            @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
+                        </td>
+                    </tr>
+                </table>
+
+                <table class="formtabledone" style="margin-top: 20px; width: 100%;">
+                    <tr>
+                        <td style="text-align:right">
+                            <button type="submit" class="submit">Hoàn tất đăng ký</button>
+                        </td>
+                        <td style="text-align:left">
+                            <a href="@Url.Action("Login", "Account")" class="submit" style="text-decoration: none;border-radius:10px; display: inline-block; text-align: center; line-height: 35px; background: #fff; color: #d70018; border: 1px solid #d70018;">
+                                Quay lại đăng nhập
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+            }
+        </div>
+
+        <img src="https://cdn2.cellphones.com.vn/insecure/rs:fill:214:530/q:90/plain/https://media-asset.cellphones.com.vn/page_configs/01KA02NMX2EYFAW0MVTB879QH2.png" alt="Banner phải" class="side-banner right">
+
+    </div>
+</body>
+</html>

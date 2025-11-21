@@ -1,0 +1,172 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - CellphoneS</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/Content/Layout.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        /* CSS bổ sung để xử lý phần hiển thị User khi đã đăng nhập */
+        .user-info-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: white;
+            font-size: 14px;
+        }
+
+            .user-info-header a {
+                color: white;
+                text-decoration: none;
+            }
+
+                .user-info-header a:hover {
+                    text-decoration: underline;
+                }
+
+        body {
+            overflow-x: hidden;
+        }
+
+        main {
+            min-height: 600px;
+            padding-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="headercenter">
+            <a style="color:white; text-decoration:none;" href="@Url.Action("Index", "Home")">
+                <h2>Cellphone<strong>S</strong></h2>
+            </a>
+
+            <form class="danhmuc">
+                <i class="fa-solid fa-list"></i>
+                <select onchange="location.href=this.value" class="danhmuc">
+                    <option value="dm">Danhmục </option>
+                    <option value="~/Home/Dienthoai">Điện thoại</option>
+                    <option value="~/Home/Laptop">Laptop</option>
+                    <option value="~/Home/AmThanh">Âm thanh</option>
+                </select>
+            </form>
+
+            <form class="tinhthanh">
+                <i class="fa-solid fa-location-dot"></i>
+                <select class="tinhthanh">
+                    <option value="">Hồ Chí Minh</option>
+                    <option value="ha-noi">Hà Nội</option>
+                    <option value="da-nang">Đà Nẵng</option>
+                </select>
+            </form>
+
+            @*phần tìm kiếm sản phẩm*@
+            <section>
+                <form class="searchform" action="@Url.Action("Index", "Home")" method="get">
+                    <input type="text"
+                           name="SearchTerm"
+                           value="@Request.QueryString["SearchTerm"]"
+                           placeholder="Bạn muốn mua gì hôm nay?"
+                           style="border: none; outline: none; width: 100%; padding-left: 10px;">
+                    <button type="submit"><i class="fa fa-search"></i></button>
+                </form>
+            </section>
+            <a class="giohang" href="@Url.Action("Index", "Cart")">
+                Giỏ hàng <i class="fa-solid fa-cart-shopping"></i>
+            </a>
+
+            @if (Session["CustomerName"] != null)
+            {
+                // TRƯỜNG HỢP ĐÃ ĐĂNG NHẬP
+                <div class="user-info-header">
+                    
+                    <a href="@Url.Action("Index", "Profile")">
+                        <span>Chào, <i class="fa-regular fa-user"></i>  <b>@Session["CustomerName"]</b></span>
+                    </a>
+                    <span>|</span>
+                    <a href="@Url.Action("OrderHistory", "Order")">Đơn hàng</a>
+                    <span>|</span>
+                    <a href="@Url.Action("Logout", "Account")"><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất </a>
+                </div>
+            }
+            else
+            {
+                // TRƯỜNG HỢP CHƯA ĐĂNG NHẬP
+                <a class="dangnhap" href="@Url.Action("Login", "Account")">
+                    Đăng nhập <i class="fa-regular fa-user"></i>
+                </a>
+            }
+        </div>
+    </header>
+
+    <main class="container">
+        @RenderBody()
+    </main>
+
+    <footer class="footer">
+        <div class="footercenter">
+            <div>
+                <p><strong>Tổng đài hỗ trợ miễn phí</strong><br />
+                <p>
+                    Mua hàng - bảo hành <strong>1800.2097</strong>(7h30 - 22h00)<br />
+                    Khiếu nại <strong>1800.2063</strong> (8h00 - 21h30)
+                </p>
+            </div>
+            <div>
+                <p><strong>Thông tin về chính sách</strong></p>
+                <p>
+                    Mua hàng và thanh toán Online<br />
+                    Mua hàng trả góp Online<br />
+                    Mua hàng trả góp bằng thẻ tín dụng<br />
+                    Chính sách giao hàng<br />
+                    Chính sách đổi trả<br />
+                    Tra điểm Smember<br />
+                    Xem ưu đãi Smember<br />
+                    Tra thông tin bảo hành<br />
+                    Tra cứu hoá đơn điện tử<br />
+                    Thông tin hoá đơn mua hàng<br />
+                    Trung tâm bảo hành chính hãng<br />
+                    Quy định về việc sao lưu dữ liệu<br />
+                    Chính sách khui hộp sản phẩm Apple<br />
+                    VAT Refund
+                </p>
+            </div>
+            <div>
+                <p>
+                    <strong>Dịch vụ và thông tin khác</strong><br />
+                    Khách hàng doanh nghiệp (B2B)<br />
+                    Ưu đãi thanh toán<br />
+                    Quy chế hoạt động<br />
+                    Chính sách bảo mật thông tin cá nhân<br />
+                    Chính sách Bảo hành<br />
+                    Liên hệ hợp tác kinh doanh<br />
+                    Tuyển dụng<br />
+                    Dịch vụ bảo hành mở rộng
+                </p>
+            </div>
+            <div>
+                <p>
+                    <strong>Kết nối với CellPhoneS</strong><br><br />
+                    <a href="https://www.youtube.com/CellphoneSOfficial"> <img src="https://upload.wikimedia.org/wikipedia/commons/e/ef/Youtube_logo.png" width="40" height="40" /></a>
+                    <a href="https://www.instagram.com/cellphonesvn"> <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Instagram_logo_2022.svg/2048px-Instagram_logo_2022.svg.png" width="40" height="40" /></a>
+                    <a href="https://www.facebook.com/CellphoneSVietnam"> <img src="https://upload.wikimedia.org/wikipedia/commons/e/ee/Logo_de_Facebook.png" width="40" height="40" /></a>
+                    <a href="https://www.tiktok.com/cellphones.official"> <img src="https://img.freepik.com/premium-vector/tik-tok-logo_578229-290.jpg?semt=ais_hybrid&w=740&q=80" width="40" height="40" /></a>
+                    <a href="https://oa.zalo.me/3894196696036261863"> <img src=https://icolor.vn/wp-content/uploads/2024/08/logo-zalo-2.jpg" width="40" height="40" /></a>
+                </p>
+                <p>
+                    <strong>Web thành viên</strong><br><br />
+                    Hệ thống bảo hành và chăm sóc Điện thoại - Máy tính<br />
+                    <a href="https://dienthoaivui.com.vn/"><img src="https://static.cellphones.com.vn/img/dtv.2181eec.png" width="100" height="40" /></a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

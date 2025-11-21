@@ -1,0 +1,27 @@
+﻿﻿@model TrangwebCellPhoneS.Models.ViewModel.ProductDetailsVM
+@using PagedList.Mvc;
+<link rel="stylesheet" href="~/Content/SanPham.css" />
+<link rel="stylesheet" href="~/Content/PagedList.css" />
+
+<!-- Hiển thị danh sách sản phẩm -->
+@if (Model.TopProducts != null && Model.TopProducts.Any())
+{
+    <section class="container-fluid listProduct">
+        <h4 style="font-weight:bold;">Sản phẩm bán chạy</h4>
+        <ul class="list-container">
+            @foreach (var product in Model.TopProducts)
+            {
+                <li class="lproduct-item">
+                    <div>
+                        <a href="@Url.Action("ProductDetails", "Home", new { id = product.ProductID })">
+                            <img src="@Html.DisplayFor(modelItem => product.ProductImage)" />
+                        </a>
+                    </div>
+                    <h5>@Html.DisplayFor(modelItem => product.ProductName)</h5>
+                    <p class="prodSale">@Html.DisplayFor(modelItem => product.ProductPrice)</p>
+                </li>
+            }
+        </ul>
+    </section>
+
+}

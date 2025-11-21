@@ -1,0 +1,14 @@
+﻿@model IEnumerable<TrangwebCellPhoneS.Models.Product>
+@{
+    ViewBag.Title = "Laptop";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container" style="margin-top: 20px; min-height: 600px;">
+    <div style="background: #d70018; color: white; padding: 15px; border-radius: 8px; margin-bottom: 20px; display:flex; align-items:center; gap:10px;">
+        <i class="fa-solid fa-laptop"></i>
+        <h2 style="margin: 0; font-size: 20px; text-transform: uppercase; font-weight: bold;">TẤT CẢ LAPTOP</h2>
+    </div>
+
+    @Html.Partial("_PVdtltnProduct", Model)
+</div>

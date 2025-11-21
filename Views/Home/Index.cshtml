@@ -1,0 +1,63 @@
+﻿@model TrangwebCellPhoneS.Models.ViewModel.HomeProductVM
+@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    <link rel="stylesheet" type="text/css" href="~/Content/SanPham.css" />
+}
+
+
+<head>
+    <style>
+        .bannercel {
+            text-align: center;
+            margin-top: 20px; /* Thêm một chút khoảng cách bên trên cho đẹp */
+            margin-bottom: 20px; /* Thêm khoảng cách bên dưới */
+        }
+    </style>
+</head>
+
+@*Phần banner*@
+<section class="bannercel">
+    <img src="https://cdn2.cellphones.com.vn/insecure/rs:fill:1036:450/q:90/plain/https://dashboard.cellphones.com.vn/storage/690x300_iPhone_17_Pro_Opensale_v3.png" />
+
+</section>
+
+<hr />
+
+@*Sản phẩm nổi bật*@
+@Html.Partial("_PVFeatureProduct", Model)
+
+@*Sản phẩm mới*@
+@Html.Partial("_PVNewProduct", Model)
+
+<div class="container" style="margin-top: 30px;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+        <h2 style="font-size: 22px; font-weight: bold; text-transform: uppercase; color: #333; margin: 0;">
+            ĐIỆN THOẠI 
+        </h2>
+        <a href="~/Home/Dienthoai" style="font-size: 13px; text-decoration: none; color: #555;">Xem tất cả ></a>
+    </div>
+    @Html.Partial("_PVdtltnProduct", Model.MobileProducts)
+</div>
+
+
+<div class="container" style="margin-top: 30px;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+        <h2 style="font-size: 22px; font-weight: bold; text-transform: uppercase; color: #333; margin: 0;">
+            LAPTOP 
+        </h2>
+        <a href="~/Home/Laptop" style="font-size: 13px; text-decoration: none; color: #555;">Xem tất cả ></a>
+    </div>
+    @Html.Partial("_PVdtltnProduct", Model.LaptopProducts)
+</div>
+
+
+<div class="container" style="margin-top: 30px;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+        <h2 style="font-size: 22px; font-weight: bold; text-transform: uppercase; color: #333; margin: 0;">
+            ÂM THANH
+        </h2>
+        <a href="~/Home/AmThanh" style="font-size: 13px; text-decoration: none; color: #555;">Xem tất cả ></a>
+    </div>
+    @Html.Partial("_PVdtltnProduct", Model.AudioProducts)
+</div>
