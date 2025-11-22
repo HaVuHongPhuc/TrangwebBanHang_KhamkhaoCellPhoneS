@@ -1,4 +1,130 @@
-﻿/* Khung đỏ bao quanh toàn bộ */
+﻿
+/* 1. KHUNG BAO NGOÀI (CONTAINER) */
+.home-hero-section {
+    display: flex;
+    gap: 15px; 
+    margin-top: 20px;
+    margin-bottom: 30px;
+    align-items: flex-start;
+}
+
+
+.left-sidebar-column {
+    width: 230px; 
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column; 
+    gap: 15px;
+}
+
+.sidebar-menu-container {
+    background: white;
+    border-radius: 10px; 
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1); 
+    padding: 10px 0;
+    overflow: hidden;
+}
+
+.sidebar-menu-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+    .sidebar-menu-list li a {
+        display: flex;
+        align-items: center;
+        padding: 8px 15px; /* Khoảng cách trong mỗi mục menu */
+        text-decoration: none;
+        color: #333;
+        font-size: 13px;
+        font-weight: 600;
+    }
+
+.menu-icon {
+    width: 25px;
+    text-align: center;
+    margin-right: 10px;
+    color: #555;
+}
+
+.sidebar-menu-list li a:hover .menu-icon {
+    color: #d70018;
+}
+
+.menu-text {
+    flex: 1;
+}
+
+.arrow-icon {
+    font-size: 10px;
+    color: #ccc;
+}
+
+.sticky-banner-container {
+    width: 100%;
+}
+
+.sticky-banner-img {
+    width: 230px;
+    height: 460px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    display: block;
+}
+.main-banner-container {
+    flex: 1; /* Tự động chiếm hết khoảng trống còn lại */
+    display: flex;
+    flex-direction: column; /* Xếp dọc */
+    gap: 15px;
+}
+
+/* --- C. BANNER CHÍNH TO --- */
+.banner-main img {
+    width: 100%;
+    height: auto; /* Tự chỉnh theo tỷ lệ ảnh */
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    display: block;
+}
+
+/* --- D. 3 BANNER NHỎ BÊN DƯỚI --- */
+.sub-banners {
+    display: flex;
+    justify-content: space-between; 
+    gap: 15px;
+}
+
+    .sub-banners img {
+        width: 32%; /* Mỗi ảnh chiếm khoảng 1/3 chiều rộng */
+        height: auto;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        display: block;
+    }
+
+@media (max-width: 992px) {
+    .home-hero-section {
+        flex-direction: column; /* Chuyển thành dọc trên Tablet */
+    }
+
+    .left-sidebar-column {
+        width: 100%; /* Menu chiếm hết chiều rộng */
+        flex-direction: row; /* Xếp Menu và Banner dọc thành hàng ngang */
+    }
+
+    .sidebar-menu-container {
+        flex: 2;
+    }
+
+    .sticky-banner-container {
+        flex: 1;
+        display: none; /* Hoặc ẩn banner dọc đi cho gọn */
+    }
+}
+
+/* Khung đỏ bao quanh toàn bộ */
 .featureProd-section {
     background-color: darkred;
     border-radius: 10px;
@@ -53,13 +179,11 @@
     border-radius: 10px;
     padding: 15px;
     border: 1px solid #eee;
-    transition: all 0.3s ease;
     width: calc((100% - (15px * 5)) / 6);
     /* --------------------------- */
 }
     .grid-item-6:hover {
         box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        transform: translateY(-3px);
         border-color: #d70018;
     }
 /* --- SECTION CHÍNH (Nền Đỏ) --- */
@@ -105,13 +229,8 @@
     min-width: 220px;
     width: 220px;
     flex-shrink: 0;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-    .fproduct-item:hover {
-        transform: translateY(-3px); /* Nhún nhẹ khi di chuột */
-        box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-    }
 
 /* --- BADGES (Giảm giá, Trả góp) --- */
 .badges {

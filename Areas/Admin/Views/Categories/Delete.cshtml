@@ -1,34 +1,34 @@
-﻿@model TrangwebCellPhoneS.Models.Category
+﻿    @model TrangwebCellPhoneS.Models.Category
 
-@{
-    ViewBag.Title = "Delete";
-    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
-}
-
-<h2 class="bg-success">Xóa danh mục</h2>
-
-<h4 style="color:orangered" class="bg-btn-outline-danger">Bạn có chắc chắn muốn xóa không?</h4>
-<div>
-    <h4>Category</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.CategoryName)
-        </dt>
-        @*Hiện giá trị của thuộc tính CategoryName*@
-        <dd>
-            @Html.DisplayFor(model => model.CategoryName)
-        </dd>
-
-    </dl>
-
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Xóa" class="btn btn-primary" /> |
-            @Html.ActionLink("Chở về danh sách", "Index", null, new { @class = "btn btn-primary" })
-        </div>
+    @{
+        ViewBag.Title = "Delete";
+        Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
     }
-</div>
+
+    <h2 class="bg-success">Xóa danh mục</h2>
+
+    <h4 style="color:orangered" class="bg-btn-outline-danger">Bạn có chắc chắn muốn xóa không?</h4>
+    <div>
+        <h4>Category</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.CategoryName)
+            </dt>
+            @*Hiện giá trị của thuộc tính CategoryName*@
+            <dd>
+                @Html.DisplayFor(model => model.CategoryName)
+            </dd>
+
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Xóa" class="btn btn-primary" /> |
+                @Html.ActionLink("Chở về danh sách", "Index", null, new { @class = "btn btn-primary" })
+            </div>
+        }
+    </div>

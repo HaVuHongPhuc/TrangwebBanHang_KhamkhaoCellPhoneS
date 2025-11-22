@@ -9,6 +9,75 @@
         <i class="fa-solid fa-headphones"></i>
         <h2 style="margin: 0; font-size: 20px; text-transform: uppercase; font-weight: bold;">THIẾT BỊ ÂM THANH</h2>
     </div>
+    <style>
+        .sort-bar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            background: #f9f9f9;
+            padding: 10px;
+            border-radius: 8px;
+        }
 
+        .sort-label {
+            font-weight: bold;
+            font-size: 14px;
+            color: #333;
+            margin-right: 5px;
+        }
+
+        .btn-sort {
+            text-decoration: none;
+            padding: 6px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background: white;
+            color: #333;
+            font-size: 13px;
+            transition: all 0.2s;
+        }
+
+            .btn-sort:hover {
+                background: #f0f0f0;
+                border-color: #ccc;
+                text-decoration: none;
+                color: #000;
+            }
+            /* Style cho nút đang được chọn */
+            .btn-sort.active {
+                background: #d70018; /* Màu đỏ CellphoneS */
+                color: white;
+                border-color: #d70018;
+            }
+
+            .btn-sort i {
+                margin-right: 5px;
+            }
+    </style>
+
+    <div class="sort-bar">
+        <span class="sort-label"><i class="fa-solid fa-arrow-up-wide-short"></i> Sắp xếp theo:</span>
+
+        <a href="@Url.Action(ViewContext.RouteData.Values["action"].ToString(), new { sortOrder = "price_desc" })"
+           class="btn-sort @(ViewBag.CurrentSort == "price_desc" ? "active" : "")">
+            <i class="fa-solid fa-arrow-down-9-1"></i> Giá Cao - Thấp
+        </a>
+
+        <a href="@Url.Action(ViewContext.RouteData.Values["action"].ToString(), new { sortOrder = "price_asc" })"
+           class="btn-sort @(ViewBag.CurrentSort == "price_asc" ? "active" : "")">
+            <i class="fa-solid fa-arrow-up-1-9"></i> Giá Thấp - Cao
+        </a>
+
+        <a href="@Url.Action(ViewContext.RouteData.Values["action"].ToString(), new { sortOrder = "name_asc" })"
+           class="btn-sort @(ViewBag.CurrentSort == "name_asc" ? "active" : "")">
+            <i class="fa-solid fa-arrow-down-a-z"></i> Tên A - Z
+        </a>
+
+        <a href="@Url.Action(ViewContext.RouteData.Values["action"].ToString(), new { sortOrder = "name_desc" })"
+           class="btn-sort @(ViewBag.CurrentSort == "name_desc" ? "active" : "")">
+            <i class="fa-solid fa-arrow-up-z-a"></i> Tên Z - A
+        </a>
+    </div>
     @Html.Partial("_PVdtltnProduct", Model)
 </div>

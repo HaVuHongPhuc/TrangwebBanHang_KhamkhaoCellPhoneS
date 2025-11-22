@@ -74,23 +74,19 @@
 
     </table>
 
-
-    <p>
-        @Html.ActionLink("Thêm mới", "Create", null, new { @class = "btn btn-primary" })
-    </p>
-
-
     //Hiển thị phân trang
     <div class="pagination-container">
         @Html.PagedListPager(Model.Products, page => Url.Action("Index", new
-        {
-            page,
-            searchTerm = Model.SearchTerm,
+   {
+       page,
+            searchTerm = Request.QueryString["searchTerm"],
             minPrice = Model.MinPrice,
             maxPrice = Model.MaxPrice,
             sortOrder = Model.SortOrder
-        }),
-        new PagedListRenderOptions { UlElementClasses = new[] { "pagination" } }) @* <-- THÊM CÁI NÀY *@
+
+   }),
+
+        new PagedListRenderOptions { UlElementClasses = new[] { "pagination" } })
     </div>
 }
 else

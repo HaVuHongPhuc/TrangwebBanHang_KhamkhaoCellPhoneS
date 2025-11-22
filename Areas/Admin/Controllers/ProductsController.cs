@@ -21,6 +21,7 @@ namespace TrangwebCellPhoneS.Areas.Admin.Controllers
         public ActionResult Index(string searchTerm, decimal? minPrice, decimal? maxPrice, string sortOrder, int? page)
         {
             var model = new ProductSearchVM();
+            model.SearchTerm = searchTerm;
             var products = db.Products.AsQueryable();
             if (!string.IsNullOrEmpty(searchTerm))
             {   //Tìm kiếm sản phẩm dựa trên từ khóa
@@ -64,7 +65,7 @@ namespace TrangwebCellPhoneS.Areas.Admin.Controllers
             //Đoạn code liên quan tới phân trang
             //Lấy số trang hiện tại (mặc định là trang 1 nếu không có giá trị)
             int pageNumber = page ?? 1;
-            int pageSize = 2; //Số sản phẩm mỗi trang
+            int pageSize = 5; //Số sản phẩm mỗi trang
             model.Products = products.ToPagedList(pageNumber, pageSize);
             return View(model);
         }

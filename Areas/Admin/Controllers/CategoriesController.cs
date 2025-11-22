@@ -48,6 +48,11 @@ namespace TrangwebCellPhoneS.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "CategoryID,CategoryName")] Category category)
         {
+            if (db.Categories.Any(c => c.CategoryName == category.CategoryName))
+            {
+                // Thêm lỗi vào ModelState. "CategoryName" là tên thuộc tính sẽ hiển thị lỗi bên dưới nó
+                ModelState.AddModelError("CategoryName", "Danh mục này đã tồn tại.");
+            }
             if (ModelState.IsValid)
             {
                 db.Categories.Add(category);

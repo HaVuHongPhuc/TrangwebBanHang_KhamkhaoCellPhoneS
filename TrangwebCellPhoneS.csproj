@@ -297,8 +297,6 @@
     <Content Include="Views\Order\OrderSuccess.cshtml" />
     <Content Include="Views\Order\Shipping.cshtml" />
     <Content Include="Views\Order\OrderHistory.cshtml" />
-    <Content Include="Views\Home\information.cshtml" />
-    <Content Include="Views\Home\CusInf.cshtml" />
     <Content Include="Views\Profile\Index.cshtml" />
     <Content Include="Views\Home\Dienthoai.cshtml" />
     <Content Include="Views\Home\Laptop.cshtml" />

@@ -21,10 +21,10 @@ namespace TrangwebCellPhoneS.Models.ViewModel
         [Display(Name = "Trạng thái thanh toán")]
         public string PaymentStatus { get; set; }
 
-        [Display(Name = "Phương thức thanh toán")]
+        [Required(ErrorMessage = "Vui lòng chọn phương thức thanh toán")]
         public string PaymentMethod { get; set; }
 
-        [Display(Name = "Phương thức giao hàng")]
+        [Required(ErrorMessage = "Vui lòng chọn phương thức giao hàng")]
         public string ShippingMethod { get; set; }
 
         [Display(Name = "Địa chỉ giao hàng")]

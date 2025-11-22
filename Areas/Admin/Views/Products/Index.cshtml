@@ -53,16 +53,16 @@
         <div class="form-group order-container">
             Sắp xếp theo:
             @Html.ActionLink("Tên tăng dần", "Index",
-                     new { sortOrder = "name_asc", searchTerm = Model.SearchTerm })
+                    new { sortOrder = "name_asc", searchTerm = Request.QueryString["searchTerm"], minPrice = Request.QueryString["minPrice"], maxPrice = Request.QueryString["maxPrice"] })
             |
             @Html.ActionLink("Tên giảm dần", "Index",
-                     new { sortOrder = "name_desc", searchTerm = Model.SearchTerm })
+                    new { sortOrder = "name_desc", searchTerm = Request.QueryString["searchTerm"], minPrice = Request.QueryString["minPrice"], maxPrice = Request.QueryString["maxPrice"] })
             |
             @Html.ActionLink("Giá tăng dần", "Index",
-                     new { sortOrder = "price_asc", searchTerm = Model.SearchTerm })
+                    new { sortOrder = "price_asc", searchTerm = Request.QueryString["searchTerm"], minPrice = Request.QueryString["minPrice"], maxPrice = Request.QueryString["maxPrice"] })
             |
             @Html.ActionLink("Giá giảm dần", "Index",
-                     new { sortOrder = "price_desc", searchTerm = Model.SearchTerm })
+                    new { sortOrder = "price_desc", searchTerm = Request.QueryString["searchTerm"], minPrice = Request.QueryString["minPrice"], maxPrice = Request.QueryString["maxPrice"] })
         </div>
     }
     <br />

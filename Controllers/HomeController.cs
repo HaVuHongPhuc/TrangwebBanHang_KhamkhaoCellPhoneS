@@ -36,19 +36,19 @@ namespace TrangwebCellPhoneS.Controllers
             model.MobileProducts = products
                 .Where(p => p.CategoryID == 3)
                 .OrderByDescending(p => p.OrderDetails.Count)
-                .Take(10).ToList();
+                .Take(6).ToList();
 
             // 2. LẤY LAPTOP (Thay số 2 bằng ID thật của bạn)
             model.LaptopProducts = products
                 .Where(p => p.CategoryID == 1)
                 .OrderByDescending(p => p.OrderDetails.Count)
-                .Take(10).ToList();
+                .Take(6).ToList();
 
             // 3. LẤY ÂM THANH (Thay số 3 bằng ID thật của bạn)
             model.AudioProducts = products
                 .Where(p => p.CategoryID == 2)
                 .OrderByDescending(p => p.OrderDetails.Count)
-                .Take(10).ToList();
+                .Take(6).ToList();
 
             //Đoạn code liên quan tới phân trang
             //Lấy số trang hiện tại (mặc định là trang 1 nếu không có giá trị)
@@ -118,42 +118,73 @@ namespace TrangwebCellPhoneS.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }      
+
+        public ActionResult Dienthoai(string sortOrder)
+        {
+            // Lưu lại loại sắp xếp để View biết đường mà tô màu nút đang chọn
+            ViewBag.CurrentSort = sortOrder;
+
+            var products = db.Products.Where(p => p.CategoryID == 3); // Lọc Điện thoại
+
+            // Logic sắp xếp
+            switch (sortOrder)
+            {
+                case "price_asc":
+                    products = products.OrderBy(p => p.ProductPrice);
+                    break;
+                case "price_desc":
+                    products = products.OrderByDescending(p => p.ProductPrice);
+                    break;
+                case "name_asc":
+                    products = products.OrderBy(p => p.ProductName);
+                    break;
+                case "name_desc":
+                    products = products.OrderByDescending(p => p.ProductName);
+                    break;
+                default: // Mặc định sắp xếp theo bán chạy (hoặc mới nhất)
+                    products = products.OrderByDescending(p => p.OrderDetails.Count);
+                    break;
+            }
+
+            // Lấy 10 sản phẩm sau khi đã sắp xếp
+            return View(products.Take(10).ToList());
         }
 
-        // 1. Trang Điện thoại
-        public ActionResult Dienthoai()
+        // 2. Trang Laptop (ID = 1)
+        public ActionResult Laptop(string sortOrder)
         {
-            var products = db.Products
-                .Where(p => p.Category.CategoryName.Contains("Điện thoại")) // Lọc theo tên danh mục
-                .OrderByDescending(p => p.OrderDetails.Count) // Sắp xếp theo bán chạy (hoặc ID tùy bạn)
-                .Take(10) // Chỉ lấy tối đa 10 sản phẩm
-                .ToList();
+            ViewBag.CurrentSort = sortOrder;
+            var products = db.Products.Where(p => p.CategoryID == 1); // Lọc Laptop
 
-            return View(products);
+            switch (sortOrder)
+            {
+                case "price_asc": products = products.OrderBy(p => p.ProductPrice); break;
+                case "price_desc": products = products.OrderByDescending(p => p.ProductPrice); break;
+                case "name_asc": products = products.OrderBy(p => p.ProductName); break;
+                case "name_desc": products = products.OrderByDescending(p => p.ProductName); break;
+                default: products = products.OrderByDescending(p => p.OrderDetails.Count); break;
+            }
+
+            return View(products.Take(10).ToList());
         }
 
-        // 2. Trang Laptop
-        public ActionResult Laptop()
+        // 3. Trang Âm thanh (ID = 2)
+        public ActionResult AmThanh(string sortOrder)
         {
-            var products = db.Products
-                .Where(p => p.Category.CategoryName.Contains("Laptop"))
-                .OrderByDescending(p => p.OrderDetails.Count)
-                .Take(10)
-                .ToList();
+            ViewBag.CurrentSort = sortOrder;
+            var products = db.Products.Where(p => p.CategoryID == 2); // Lọc Âm thanh
 
-            return View(products);
-        }
+            switch (sortOrder)
+            {
+                case "price_asc": products = products.OrderBy(p => p.ProductPrice); break;
+                case "price_desc": products = products.OrderByDescending(p => p.ProductPrice); break;
+                case "name_asc": products = products.OrderBy(p => p.ProductName); break;
+                case "name_desc": products = products.OrderByDescending(p => p.ProductName); break;
+                default: products = products.OrderByDescending(p => p.OrderDetails.Count); break;
+            }
 
-        // 3. Trang Âm thanh (Tai nghe)
-        public ActionResult AmThanh()
-        {
-            var products = db.Products
-                .Where(p => p.Category.CategoryName.Contains("Tai nghe") || p.Category.CategoryName.Contains("Tai nghe"))
-                .OrderByDescending(p => p.OrderDetails.Count)
-                .Take(10)
-                .ToList();
-
-            return View(products);
+            return View(products.Take(10).ToList());
         }
     }
 }

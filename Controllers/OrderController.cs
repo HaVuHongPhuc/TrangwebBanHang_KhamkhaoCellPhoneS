@@ -199,6 +199,8 @@ namespace TrangwebCellPhoneS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Shipping(CheckoutVM model)
         {
+            ModelState.Remove("PaymentMethod");
+            ModelState.Remove("ShippingMethod");
             if (ModelState.IsValid)
             {
                 // Tạm lưu thông tin giao hàng vào Session (Chưa lưu vào DB vội)
