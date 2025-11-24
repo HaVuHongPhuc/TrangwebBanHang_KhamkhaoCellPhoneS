@@ -30,6 +30,7 @@ namespace TrangwebCellPhoneS.Models.ViewModel
         [Required]
         [Display(Name = "Số điện thoại")]
         [DataType(DataType.PhoneNumber)]
+        [StringLength(10, MinimumLength = 9, ErrorMessage = "SĐT không hợp lệ, vui lòng nhập lại")]
         public string CustomerPhone { get; set; }
 
         [Required]

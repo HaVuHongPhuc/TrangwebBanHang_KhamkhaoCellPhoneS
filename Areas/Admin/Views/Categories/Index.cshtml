@@ -1,39 +1,177 @@
 ﻿@model IEnumerable<TrangwebCellPhoneS.Models.Category>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Quản lý Danh mục";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
-@*hiển thị lỗi xóa sản phẩm còn đang tồn tại*@
-@if (TempData["ErrorMessage"] != null)
-{
-    <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
-}
-<h2 style="color:white;" class="bg-success">DANH SÁCH MỤC SẢN PHẨM</h2>
 
-<table class="table bg-info col-lg-8">
-    <tr>
-        <th style="color:white;" class="bg-success col-lg-5">
-            @*@Html.DisplayNameFor(model => model.CategoryName)*@
-            Tên danh mục
-        </th>
-        <th style="color:white;" class="bg-success col-lg-3"></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.CategoryName)
-            </td>
-            <td>
-                @Html.ActionLink("Cập nhật", "Edit", new { id = item.CategoryID }, new { @class = "btn btn-primary" }) |
-                @Html.ActionLink("Xem chi tiết", "Details", new { id = item.CategoryID }, new { @class = "btn btn-primary" }) |
-                @Html.ActionLink("Xóa", "Delete", new { id = item.CategoryID }, new { @class = "btn btn-primary" })
-            </td>
-        </tr>
+<style>
+    /* 1. Tạo nền xám nhẹ cho vùng chứa chính để làm nổi bật bảng dữ liệu */
+    .admin-content-wrapper {
+        background-color: #f4f6f9;
+        padding: 20px;
+        border-radius: 8px;
     }
-</table>
-<p>
-    @Html.ActionLink("Thêm mới", "Create", null, new { @class = "btn btn-primary" })
-</p>
+
+    /* 2. Thiết kế Khung chứa (Card) màu trắng, đổ bóng nhẹ */
+    .admin-card {
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 0 15px rgba(0,0,0,0.05); /* Bóng mờ nhẹ */
+        padding: 25px;
+        border-top: 4px solid #d70018; /* Đường viền màu đỏ CellphoneS tạo điểm nhấn */
+    }
+
+    /* 3. Tiêu đề trang */
+    .page-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 15px;
+    }
+
+    .page-title {
+        font-size: 24px;
+        font-weight: bold;
+        color: #333;
+        margin: 0;
+        text-transform: uppercase;
+    }
+
+    /* 4. Tùy chỉnh Bảng (Table) */
+    .custom-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+        .custom-table thead th {
+            background-color: #343a40; /* Màu nền tiêu đề bảng tối màu */
+            color: #fff;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+            border: none;
+        }
+
+        .custom-table tbody td {
+            padding: 12px;
+            border-bottom: 1px solid #f0f0f0;
+            color: #555;
+            vertical-align: middle;
+        }
+
+        .custom-table tbody tr:hover {
+            background-color: #f8f9fa; /* Hiệu ứng hover dòng */
+        }
+
+    /* 5. Tùy chỉnh các nút bấm (Action Buttons) */
+    .btn-action {
+        margin-right: 5px;
+        font-size: 13px;
+        padding: 5px 10px;
+        border-radius: 4px;
+        text-decoration: none !important;
+        transition: all 0.3s;
+        display: inline-block;
+    }
+
+    .btn-edit {
+        background-color: #ffc107; /* Vàng */
+        color: #212529;
+        border: 1px solid #ffc107;
+    }
+
+        .btn-edit:hover {
+            background-color: #e0a800;
+            color: #000;
+        }
+
+    .btn-details {
+        background-color: #17a2b8; /* Xanh Cyan */
+        color: white;
+        border: 1px solid #17a2b8;
+    }
+
+        .btn-details:hover {
+            background-color: #138496;
+            color: white;
+        }
+
+    .btn-delete {
+        background-color: #dc3545; /* Đỏ */
+        color: white;
+        border: 1px solid #dc3545;
+    }
+
+        .btn-delete:hover {
+            background-color: #c82333;
+            color: white;
+        }
+
+    .btn-add-new {
+        background-color: #28a745; /* Xanh lá */
+        color: white;
+        padding: 8px 20px;
+        border-radius: 4px;
+        text-decoration: none;
+        font-weight: bold;
+        box-shadow: 0 2px 5px rgba(40, 167, 69, 0.3);
+    }
+
+        .btn-add-new:hover {
+            background-color: #218838;
+            color: white;
+            text-decoration: none;
+        }
+
+    /* Alert */
+    .alert-custom {
+        border-radius: 4px;
+        padding: 10px 15px;
+        margin-bottom: 20px;
+    }
+</style>
+
+<div class="admin-content-wrapper">
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger alert-custom">
+            <i class="fa fa-exclamation-circle"></i> @TempData["ErrorMessage"]
+        </div>
+    }
+
+    <div class="admin-card">
+        <div class="page-header">
+            <h2 class="page-title">Danh sách Danh mục</h2>
+            @Html.ActionLink("+ Thêm mới", "Create", null, new { @class = "btn-add-new" })
+        </div>
+
+        <div class="table-responsive">
+            <table class="table custom-table">
+                <thead>
+                    <tr>
+                        <th>Tên danh mục</th>
+                        <th style="width: 300px; text-align: center;">Chức năng</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td style="font-weight: 500;">
+                                @Html.DisplayFor(modelItem => item.CategoryName)
+                            </td>
+                            <td style="text-align: center;">
+                                @Html.ActionLink("Sửa", "Edit", new { id = item.CategoryID }, new { @class = "btn-action btn-edit" })
+                                @Html.ActionLink("Chi tiết", "Details", new { id = item.CategoryID }, new { @class = "btn-action btn-details" })
+                                @Html.ActionLink("Xóa", "Delete", new { id = item.CategoryID }, new { @class = "btn-action btn-delete" })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
