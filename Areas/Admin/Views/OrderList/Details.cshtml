@@ -1,0 +1,172 @@
+﻿@model TrangwebCellPhoneS.Models.Order
+
+@{
+    ViewBag.Title = "Chi tiết đơn hàng #" + Model.OrderID;
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<style>
+    .invoice-container {
+        max-width: 800px;
+        margin: 30px auto;
+        background: #fff;
+        padding: 40px;
+        border: 1px solid #ddd;
+        box-shadow: 0 0 20px rgba(0,0,0,0.05);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    /* Header Hóa đơn */
+    .invoice-header {
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 2px solid #d70018; /* Viền đỏ CellphoneS */
+        padding-bottom: 20px;
+        margin-bottom: 30px;
+    }
+
+    .company-info h2 {
+        margin: 0;
+        color: #d70018;
+        font-weight: bold;
+    }
+
+    .company-info p {
+        margin: 5px 0;
+        color: #555;
+        font-size: 13px;
+    }
+
+    .invoice-meta {
+        text-align: right;
+    }
+
+        .invoice-meta h3 {
+            margin: 0;
+            font-size: 24px;
+            text-transform: uppercase;
+            color: #333;
+        }
+
+        .invoice-meta p {
+            margin: 5px 0;
+            color: #666;
+        }
+
+    /* Thông tin khách hàng */
+    .customer-info {
+        background-color: #f9f9f9;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 30px;
+        border: 1px dashed #ccc;
+    }
+
+    .info-title {
+        font-size: 14px;
+        font-weight: bold;
+        color: #d70018;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 5px;
+    }
+
+    .info-row {
+        display: flex;
+        margin-bottom: 8px;
+        font-size: 14px;
+    }
+
+    .info-label {
+        width: 120px;
+        font-weight: 600;
+        color: #555;
+    }
+
+    .info-val {
+        flex: 1;
+        color: #333;
+    }
+
+    .btn-print {
+        background: #333;
+        color: white;
+        padding: 10px 20px;
+        text-decoration: none;
+        border-radius: 4px;
+    }
+
+    .btn-back {
+        background: #6c757d;
+        color: white;
+        padding: 10px 20px;
+        text-decoration: none;
+        border-radius: 4px;
+        margin-right: 10px;
+    }
+
+    .btn-action {
+        font-weight: bold;
+        font-size: 14px;
+        display: inline-flex;
+        align-items: center;
+        padding: 10px 20px;
+        text-decoration: none;
+        border-radius: 4px;
+    }
+</style>
+
+<div class="invoice-container">
+    <div class="invoice-header">
+        <div class="company-info">
+            <h2>CELLPHONES</h2>
+            <p>Địa chỉ: HUFLIT, Quận 10, TP.HCM</p>
+            <p>Hotline: 12345.9876</p>
+            <p>Website: www.cellphones.com.vn</p>
+        </div>
+        <div class="invoice-meta">
+            <h3>HÓA ĐƠN BÁN HÀNG</h3>
+            <p>Mã đơn: <strong>#@Model.OrderID</strong></p>
+            <p>Ngày đặt: @Model.OrderDate.ToString("dd/MM/yyyy")</p>
+            <p>Trạng thái: <span style="color: #d70018; font-weight: bold;">@Model.PaymentStatus</span></p>
+        </div>
+    </div>
+
+    <div class="customer-info">
+        <div class="info-title">Thông tin giao hàng</div>
+
+        <div class="info-row">
+            <span class="info-label">Người nhận:</span>
+            <span class="info-val">@Model.Consignee</span>
+        </div>
+        <div class="info-row">
+            <span class="info-label">Số điện thoại:</span>
+            <span class="info-val">@Model.ConsigneePhone</span>
+        </div>
+        <div class="info-row">
+            <span class="info-label">Email:</span>
+            <span class="info-val">@Model.ConsigneeEmail</span>
+        </div>
+        <div class="info-row">
+            <span class="info-label">Địa chỉ:</span>
+            <span class="info-val">@Model.ShippingAddress</span>
+        </div>
+        <div class="info-row">
+            <span class="info-label">Hình thức TT:</span>
+            <span class="info-val">@Model.PaymentMethod</span>
+        </div>
+    </div>
+    <div class="order-items">
+        @Html.Partial("_PVOrderDetailList", Model.OrderDetails)
+    </div>
+    <br />
+    <div class="invoice-actions">
+        <a href="@Url.Action("Index")" class="btn-action btn-back"> Quay lại
+        </a>
+        <a href="@Url.Action("Index", "OrderList", new { printSuccess = true })"
+           onclick="return confirm('Bạn có muốn in hóa đơn này không?');"
+           class="btn-print"> In Hóa Đơn
+        </a>
+    </div>
+</div>

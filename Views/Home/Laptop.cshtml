@@ -61,22 +61,22 @@
 
         <a href="@Url.Action(ViewContext.RouteData.Values["action"].ToString(), new { sortOrder = "price_desc" })"
            class="btn-sort @(ViewBag.CurrentSort == "price_desc" ? "active" : "")">
-            <i class="fa-solid fa-arrow-down-9-1"></i> Giá Cao - Thấp
+            Giá Cao - Thấp
         </a>
 
         <a href="@Url.Action(ViewContext.RouteData.Values["action"].ToString(), new { sortOrder = "price_asc" })"
            class="btn-sort @(ViewBag.CurrentSort == "price_asc" ? "active" : "")">
-            <i class="fa-solid fa-arrow-up-1-9"></i> Giá Thấp - Cao
+            Giá Thấp - Cao
         </a>
 
         <a href="@Url.Action(ViewContext.RouteData.Values["action"].ToString(), new { sortOrder = "name_asc" })"
            class="btn-sort @(ViewBag.CurrentSort == "name_asc" ? "active" : "")">
-            <i class="fa-solid fa-arrow-down-a-z"></i> Tên A - Z
+            Tên A - Z
         </a>
 
         <a href="@Url.Action(ViewContext.RouteData.Values["action"].ToString(), new { sortOrder = "name_desc" })"
            class="btn-sort @(ViewBag.CurrentSort == "name_desc" ? "active" : "")">
-            <i class="fa-solid fa-arrow-up-z-a"></i> Tên Z - A
+            Tên Z - A
         </a>
     </div>
     @Html.Partial("_PVdtltnProduct", Model)

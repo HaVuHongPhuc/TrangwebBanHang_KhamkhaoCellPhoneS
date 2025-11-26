@@ -1,69 +1,167 @@
 ﻿@model TrangwebCellPhoneS.Models.Product
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Chi tiết Sản phẩm";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
 <style>
-    img {
-        height: 250px;
-        max-width: 200px;
+    .details-container {
+        background-color: #f4f6f9;
+        padding: 30px;
+        min-height: 80vh;
+        display: flex;
+        justify-content: center;
+    }
+
+    .details-card {
+        background: #fff;
+        width: 100%;
+        max-width: 900px;
+        border-radius: 10px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        overflow: hidden;
+        border-top: 5px solid #17a2b8;
+    }
+
+    .card-header {
+        padding: 20px 30px;
+        border-bottom: 1px solid #eee;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .card-title {
+        margin: 0;
+        font-size: 22px;
+        font-weight: 700;
+        color: #333;
+        text-transform: uppercase;
+    }
+
+    .card-body {
+        padding: 30px;
+        display: flex;
+        gap: 30px;
+    }
+
+    .product-image-box {
+        flex: 1;
+        text-align: center;
+        border-right: 1px dashed #eee;
+        padding-right: 30px;
+    }
+
+        .product-image-box img {
+            max-width: 100%;
+            max-height: 300px;
+            object-fit: contain;
+        }
+
+    .product-info-box {
+        flex: 2;
+    }
+
+    .info-row {
+        margin-bottom: 15px;
+        border-bottom: 1px solid #f9f9f9;
+        padding-bottom: 10px;
+    }
+
+    .info-label {
+        font-size: 13px;
+        color: #888;
+        font-weight: 600;
+        display: block;
+        margin-bottom: 3px;
+    }
+
+    .info-value {
+        font-size: 15px;
+        color: #333;
+        font-weight: 500;
+        line-height: 1.5;
+    }
+
+    .price-tag {
+        color: #d70018;
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    .card-footer {
+        padding: 20px 30px;
+        background-color: #f8f9fa;
+        border-top: 1px solid #eee;
+        text-align: right;
+    }
+
+    .btn-action {
+        display: inline-block;
+        padding: 8px 20px;
+        border-radius: 4px;
+        text-decoration: none !important;
+        font-weight: 600;
+        font-size: 14px;
+        margin-left: 10px;
+    }
+
+    .btn-back {
+        background-color: #6c757d;
+        color: white;
+    }
+
+    .btn-edit {
+        background-color: #ffc107;
+        color: #212529;
     }
 </style>
-<h2 class="bg-success">Trang chi tiết sản phẩm</h2>
-<hr />
-<dl class="dl-horizontal">
-    <dt>
-        Tên sản phẩm
-    </dt>
 
-    <dd>
-        @Html.DisplayFor(model => model.ProductName)
-    </dd>
+<div class="details-container">
+    <div class="details-card">
+        <div class="card-header">
+            <h2 class="card-title">Chi tiết Sản phẩm</h2>
+        </div>
 
-    <dt>
-        Thông số kỹ thuật
-    </dt>
+        <div class="card-body">
+            <div class="product-image-box">
+                <img src="@Model.ProductImage" alt="@Model.ProductName" />
+            </div>
 
-    <dd>
-        @Html.DisplayFor(model => model.ProductSpecifications)
-    </dd>
+            <div class="product-info-box">
+                <div class="info-row">
+                    <span class="info-label">Tên sản phẩm</span>
+                    <span class="info-value" style="font-size:18px; font-weight:bold;">@Model.ProductName</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Danh mục</span>
+                    <span class="info-value">@Model.Category.CategoryName</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Giá bán</span>
+                    <span class="info-value price-tag">@Html.DisplayFor(m => m.ProductPrice)</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Thông số kỹ thuật</span>
+                    <span class="info-value">@Model.ProductSpecifications</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Tính năng nổi bật</span>
+                    <span class="info-value">@Model.outstandingFeatures</span>
+                </div>
+            </div>
+        </div>
 
-    <dt>
-        Tính năng nổi bật
-    </dt>
-
-    <dd>
-        @Html.DisplayFor(model => model.outstandingFeatures)
-    </dd>
-
-    <dt>
-        Đơn giá
-    </dt>
-
-    <dd>
-        @Html.DisplayFor(model => model.ProductPrice)
-    </dd>
-
-    <dt>
-        Hình ảnh
-    </dt>
-
-    <dd>
-        @Html.DisplayFor(model => model.ProductImage)
-    </dd>
-
-    <dt>
-        Tên sản phẩm
-    </dt>
-
-    <dd>
-        @Html.DisplayFor(model => model.Category.CategoryName)
-    </dd>
-
-</dl>
-<p>
-    @Html.ActionLink("Cập nhập", "Edit", new { id = Model.ProductID }) |
-    @Html.ActionLink("Trờ về danh mục", "Index")
-</p>
+        <div class="card-footer">
+            <a href="@Url.Action("Index")" class="btn-action btn-back">
+                <i class="fa-solid fa-arrow-left"></i> Quay lại
+            </a>
+            <a href="@Url.Action("Edit", new { id = Model.ProductID })" class="btn-action btn-edit">
+                <i class="fa-solid fa-pen-to-square"></i> Chỉnh sửa
+            </a>
+        </div>
+    </div>
+</div>

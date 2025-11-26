@@ -1,0 +1,196 @@
+﻿@model IEnumerable<TrangwebCellPhoneS.Models.User>
+
+@{
+    ViewBag.Title = "Quản lý Quản trị viên";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+    /* 1. Khung nền tổng thể */
+    .admin-content-wrapper {
+        background-color: #f4f6f9; /* Xám nhạt dịu mắt */
+        padding: 30px;
+        min-height: 80vh;
+    }
+
+    /* 2. Thẻ Card chứa bảng */
+    .admin-card {
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.05);
+        border-top: 4px solid #d70018; /* Viền đỏ thương hiệu */
+        overflow: hidden;
+    }
+
+    /* 3. Header của Card */
+    .card-header {
+        padding: 20px 25px;
+        border-bottom: 1px solid #eee;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #fff;
+    }
+
+    .page-title {
+        margin: 0;
+        font-size: 20px;
+        font-weight: 700;
+        color: #333;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    /* Nút Thêm mới */
+    .btn-add-new {
+        background-color: #28a745;
+        color: white;
+        padding: 8px 16px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 14px;
+        transition: all 0.3s;
+        box-shadow: 0 2px 5px rgba(40, 167, 69, 0.2);
+    }
+
+        .btn-add-new:hover {
+            background-color: #218838;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+    /* 4. Tùy chỉnh Bảng */
+    .custom-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 0;
+    }
+
+        .custom-table thead {
+            background-color: #f8f9fa;
+            color: #495057;
+        }
+
+        .custom-table th {
+            padding: 15px 20px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 14px;
+            border-bottom: 2px solid #dee2e6;
+        }
+
+        .custom-table td {
+            padding: 15px 20px;
+            vertical-align: middle;
+            border-bottom: 1px solid #f0f0f0;
+            color: #555;
+            font-size: 14px;
+        }
+
+        .custom-table tbody tr:hover {
+            background-color: #fcfcfc;
+        }
+
+    /* 5. Style cho các thành phần trong bảng */
+    .role-badge {
+        background-color: #e0f3ff;
+        color: #007bff;
+        padding: 5px 10px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: bold;
+    }
+
+    .password-hidden {
+        color: #aaa;
+        letter-spacing: 2px;
+        font-family: monospace;
+    }
+
+    /* 6. Nút Hành động (Sửa/Xóa) */
+    .action-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+        border-radius: 4px;
+        color: white;
+        text-decoration: none;
+        margin: 0 3px;
+        transition: opacity 0.2s;
+    }
+
+        .action-btn:hover {
+            opacity: 0.8;
+            color: white;
+        }
+
+    .btn-edit {
+        background-color: #ffc107;
+        color: #333;
+    }
+    /* Vàng */
+    .btn-delete {
+        background-color: #dc3545;
+    }
+    /* Đỏ */
+
+</style>
+
+<div class="admin-content-wrapper">
+    <div class="admin-card">
+
+        <div class="card-header">
+            <h2 class="page-title">
+                <i class="fa-solid fa-user-shield"></i> Danh sách Quản trị viên
+            </h2>
+            <a href="@Url.Action("Create")" class="btn-add-new">
+                <i class="fa-solid fa-plus"></i> Thêm Admin
+            </a>
+        </div>
+
+        <div class="table-responsive">
+            <table class="custom-table">
+                <thead>
+                    <tr>
+                        <th>Tên đăng nhập</th>
+                        <th>Mật khẩu</th>
+                        <th style="text-align: center;">Vai trò</th>
+                        <th style="text-align: center; width: 150px;">Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td><strong>@item.Username</strong></td>
+
+                            <td class="password-hidden">••••••••</td>
+
+                            <td style="text-align: center;">
+                                <span class="role-badge">@item.UserRole</span>
+                            </td>
+
+                            <td style="text-align: center;">
+                                <a href="@Url.Action("Edit", new { id = item.Username })" class="action-btn btn-edit" title="Đổi mật khẩu">
+                                    <i class="fa-solid fa-key"></i>
+                                </a>
+
+                                <a href="@Url.Action("Delete", new { id = item.Username })"
+                                   class="action-btn btn-delete"
+                                   title="Xóa tài khoản"
+                                   onclick="return confirm('CẢNH BÁO: Bạn có chắc chắn muốn xóa Admin [@item.Username] không?');">
+                                    <i class="fa-solid fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

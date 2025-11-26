@@ -85,6 +85,22 @@ namespace TrangwebCellPhoneS.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "CategoryID,CategoryName")] Category category)
         {
+            // 1. Kiểm tra xem danh mục này có đang chứa sản phẩm nào không
+            bool coSanPham = db.Products.Any(p => p.CategoryID == category.CategoryID);
+
+            if (coSanPham)
+            {
+                // Nếu có sản phẩm, KHÔNG cho sửa
+                // Cách 1: Thêm lỗi vào ModelState để hiển thị tại trang Edit
+                ModelState.AddModelError("", "Không thể sửa danh mục này vì đang có sản phẩm thuộc về nó.");
+                return View(category);
+
+                // Cách 2 (Nếu bạn muốn đá về trang Index và hiện thông báo):
+                /*
+                TempData["ErrorMessage"] = "Không thể sửa danh mục này vì đang có sản phẩm thuộc về nó.";
+                return RedirectToAction("Index");
+                */
+            }
             if (ModelState.IsValid)
             {
                 db.Entry(category).State = EntityState.Modified;

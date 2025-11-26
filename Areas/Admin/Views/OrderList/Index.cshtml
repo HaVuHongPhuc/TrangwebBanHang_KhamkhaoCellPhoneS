@@ -1,0 +1,125 @@
+﻿@model IEnumerable<TrangwebCellPhoneS.Models.Order>
+
+@{
+    ViewBag.Title = "Quản lý Đơn hàng";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<style>
+    /* Tái sử dụng style Admin cũ */
+    .admin-content-wrapper {
+        background-color: #f4f6f9;
+        padding: 30px;
+        min-height: 80vh;
+    }
+
+    .admin-card {
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.05);
+        border-top: 4px solid #28a745;
+    }
+
+    .card-header {
+        padding: 20px;
+        border-bottom: 1px solid #eee;
+    }
+
+    .page-title {
+        margin: 0;
+        font-size: 20px;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    /* Badge trạng thái */
+    .badge-status {
+        padding: 5px 10px;
+        border-radius: 4px;
+        font-size: 11px;
+        color: white;
+        font-weight: bold;
+    }
+
+    .bg-pending {
+        background-color: #ffc107;
+        color: #333;
+    }
+
+    .bg-paid {
+        background-color: #28a745;
+    }
+
+    .btn-view {
+        background: #17a2b8;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 4px;
+        text-decoration: none;
+        font-size: 12px;
+    }
+
+        .btn-view:hover {
+            background: #138496;
+            color: white;
+        }
+</style>
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success" role="alert"
+         style="margin-top: 20px;">
+        <strong>Thông báo:</strong> @TempData["SuccessMessage"]
+        <button type="button" class="close " 
+                onclick="this.parentElement.style.display='none';">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+<div class="admin-content-wrapper">
+    <div class="admin-card">
+        <div class="card-header">
+            <h2 class="page-title"><i class="fa-solid fa-cart-flatbed"></i> Danh sách Đơn hàng</h2>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table">
+                <thead style="background:#343a40; color:white;">
+                    <tr>
+                        <th>Mã ĐH</th>
+                        <th>Khách hàng</th>
+                        <th>Ngày đặt</th>
+                        <th>Tổng tiền</th>
+                        <th>Thanh toán</th>
+                        <th>Trạng thái</th>
+                        <th class="text-center">Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td><strong>#@item.OrderID</strong></td>
+                            <td>
+                                @item.Consignee <br>
+                                <small style="color:#888">@item.ConsigneePhone</small>
+                            </td>
+                            <td>@item.OrderDate.ToString("dd/MM/yyyy")</td>
+                            <td style="color:#d70018; font-weight:bold">@item.TotalAmount.ToString("N0")₫</td>
+                            <td>@item.PaymentMethod</td>
+                            <td>
+                                <span class="badge-status @(item.PaymentStatus == "Đã thanh toán" ? "bg-paid" : "bg-pending")">
+                                    @item.PaymentStatus
+                                </span>
+                            </td>
+                            <td class="text-center">
+                                <a href="@Url.Action("Details", new { id = item.OrderID })" class="btn-view">
+                                    <i class="fa-solid fa-eye"></i> Xem
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

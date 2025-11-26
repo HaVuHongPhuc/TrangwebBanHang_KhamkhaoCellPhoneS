@@ -1,27 +1,46 @@
 ﻿@model TrangwebCellPhoneS.Models.Category
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Cập nhật Danh mục";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2 class="bg-success">Cập Nhật Danh Mục</h2>
+<style>
+    /* Dùng chung style với Create nhưng đổi màu viền */
+    .admin-form-card {
+        background: #fff;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 0 15px rgba(0,0,0,0.05);
+        max-width: 600px;
+        margin: 30px auto;
+        border-top: 4px solid #ffc107; /* Màu vàng cho Edit */
+    }
 
+    .form-title {
+        font-size: 22px;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 20px;
+        text-align: center;
+        text-transform: uppercase;
+    }
+</style>
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
+<div class="admin-form-card">
+    <h2 class="form-title">Cập nhật Danh Mục</h2>
 
-    <div class="form-horizontal">
-        <h4>Tên danh mục</h4>
-        <hr />
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
         @Html.HiddenFor(model => model.CategoryID)
 
-        @*Nhúng partial view vào form cha*@
+        @* Gọi Partial View Form *@
         @Html.Partial("PartialView_CreateEditCategory", Model)
-    </div>
-}
+    }
+</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

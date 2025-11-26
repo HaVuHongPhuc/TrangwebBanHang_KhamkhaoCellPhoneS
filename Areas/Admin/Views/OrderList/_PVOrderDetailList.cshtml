@@ -1,0 +1,68 @@
+﻿@model IEnumerable<TrangwebCellPhoneS.Models.OrderDetail>
+
+<style>
+    .invoice-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+        .invoice-table th {
+            background-color: #f8f9fa;
+            color: #333;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 12px;
+            padding: 12px;
+            border-bottom: 2px solid #ddd;
+            text-align: left;
+        }
+
+        .invoice-table td {
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+            color: #555;
+            font-size: 14px;
+        }
+
+    .text-right {
+        text-align: right;
+    }
+
+    .total-row td {
+        border-top: 2px solid #333;
+        font-weight: bold;
+        font-size: 16px;
+        color: #d70018;
+    }
+</style>
+
+<table class="invoice-table">
+    <thead>
+        <tr>
+            <th>Sản phẩm</th>
+            <th class="text-center">Số lượng</th>
+            <th class="text-right">Đơn giá</th>
+            <th class="text-right">Thành tiền</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <strong>@item.Product.ProductName</strong><br />
+                    <small class="text-muted">Mã SP: #@item.ProductID</small>
+                </td>
+                <td class="text-center">@item.Quantity</td>
+                <td class="text-right">@item.UnitPrice.ToString("N0")₫</td>
+                <td class="text-right">@((item.Quantity * item.UnitPrice).ToString("N0"))₫</td>
+            </tr>
+        }
+
+        <tr class="total-row">
+            <td colspan="3" class="text-right">TỔNG CỘNG:</td>
+            <td class="text-right">@Model.Sum(x => x.Quantity * x.UnitPrice).ToString("N0")₫</td>
+        </tr>
+    </tbody>
+</table>

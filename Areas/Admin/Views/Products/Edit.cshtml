@@ -1,26 +1,44 @@
 ﻿@model TrangwebCellPhoneS.Models.Product
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Cập nhật Sản phẩm";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2>Cập nhật sản phẩm</h2>
+<style>
+    .admin-form-card {
+        background: #fff;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 0 15px rgba(0,0,0,0.05);
+        max-width: 900px;
+        margin: 30px auto;
+        border-top: 4px solid #ffc107; /* Vàng */
+    }
 
+    .form-title {
+        font-size: 22px;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 20px;
+        text-align: center;
+        text-transform: uppercase;
+    }
+</style>
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Sản phẩm</h4>
-        <hr />
+<div class="admin-form-card">
+    <h2 class="form-title">Cập nhật Sản Phẩm</h2>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
         @Html.HiddenFor(model => model.ProductID)
-        @*Nhúng partal view vào form cha*@
+
         @Html.Partial("PartialView_CreateEditProducts", Model)
-    </div>
-}
+    }
+</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

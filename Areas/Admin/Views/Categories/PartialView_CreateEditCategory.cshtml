@@ -1,19 +1,74 @@
-﻿@*Sẽ được truyền giữa trang PartialView và trang cha*@
-@model TrangwebCellPhoneS.Models.Category
+﻿@model TrangwebCellPhoneS.Models.Category
 
-@*Đây là form con, form con này sẽ được nhúng vào form cha là Edit.cshtml và Create.cshtml*@
+<style>
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .control-label {
+        font-weight: 600;
+        margin-bottom: 8px;
+        display: block;
+        color: #555;
+    }
+
+    .form-control-custom {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+        font-size: 14px;
+        transition: border-color 0.3s;
+    }
+
+        .form-control-custom:focus {
+            border-color: #007bff;
+            outline: none;
+            box-shadow: 0 0 5px rgba(0,123,255,0.25);
+        }
+
+    .form-actions {
+        margin-top: 30px;
+        text-align: right; /* Đẩy nút sang phải */
+        border-top: 1px solid #eee;
+        padding-top: 20px;
+    }
+
+    .btn-save {
+        background-color: #007bff; /* Xanh dương */
+        color: white;
+        padding: 10px 25px;
+        border: none;
+        border-radius: 4px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+        .btn-save:hover {
+            background-color: #0056b3;
+        }
+
+    .btn-back {
+        color: #6c757d;
+        text-decoration: none;
+        margin-right: 15px;
+        font-size: 14px;
+    }
+
+        .btn-back:hover {
+            text-decoration: underline;
+        }
+</style>
+
 <div class="form-group">
-    @*@Html.LabelFor(model => model.CategoryName, htmlAttributes: new { @class = "control-label col-md-2" })*@
-    <div class="control-label col-md-2">Tên danh mục</div>
-    <div class="col-md-10">
-        @Html.EditorFor(model => model.CategoryName, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.ValidationMessageFor(model => model.CategoryName, "", new { @class = "text-danger" })
+    <label class="control-label">Tên danh mục <span style="color:red">*</span></label>
+    <div>
+        @Html.EditorFor(model => model.CategoryName, new { htmlAttributes = new { @class = "form-control-custom", placeholder = "Nhập tên danh mục..." } })
+        @Html.ValidationMessageFor(model => model.CategoryName, "", new { @class = "text-danger", style = "font-size: 13px; margin-top: 5px; display: block;" })
     </div>
-    </div>
-<br />
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Lưu" class="btn btn-primary" /> |
-            @Html.ActionLink("Chở về danh sách", "Index", null, new { @class = "btn btn-primary" })
-        </div>
-    </div>
+</div>
+
+<div class="form-actions">
+    @Html.ActionLink("Quay lại", "Index", null, new { @class = "btn-back" })
+    <input type="submit" value="Lưu dữ liệu" class="btn-save" />
+</div>

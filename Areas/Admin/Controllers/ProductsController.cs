@@ -164,8 +164,20 @@ namespace TrangwebCellPhoneS.Areas.Admin.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Product product = db.Products.Find(id);
+            // Kiểm tra xem sản phẩm này có đang nằm trong bất kỳ đơn hàng nào không
+            bool isInOrder = db.OrderDetails.Any(od => od.ProductID == id);
+
+            if (isInOrder)
+            {
+                // Sử dụng TempData để truyền thông báo lỗi sang trang Index hoặc Delete
+                TempData["ErrorMessage"] = $"Không thể xóa sản phẩm '{product.ProductName}' vì nó đang nằm trong đơn hàng.";
+                return RedirectToAction("Index");
+            }
+
             db.Products.Remove(product);
             db.SaveChanges();
+            TempData["SuccessMessage"] = "Xóa sản phẩm thành công!";
+
             return RedirectToAction("Index");
         }
 

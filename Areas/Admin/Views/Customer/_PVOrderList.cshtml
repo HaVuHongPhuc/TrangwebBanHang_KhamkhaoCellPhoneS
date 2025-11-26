@@ -1,0 +1,82 @@
+﻿@model IEnumerable<TrangwebCellPhoneS.Models.Order>
+
+<style>
+    .order-list-card {
+        margin-top: 30px;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        border-top: 3px solid #17a2b8; /* Màu xanh Cyan */
+        overflow: hidden;
+    }
+
+    .order-header {
+        padding: 15px 20px;
+        background-color: #f8f9fa;
+        border-bottom: 1px solid #eee;
+        font-weight: bold;
+        color: #333;
+    }
+
+    .badge-status {
+        padding: 5px 10px;
+        border-radius: 12px;
+        font-size: 11px;
+        font-weight: bold;
+        color: white;
+    }
+
+    .bg-pending {
+        background-color: #ffc107;
+        color: #333;
+    }
+
+    .bg-success {
+        background-color: #28a745;
+    }
+</style>
+
+<div class="order-list-card">
+    <div class="order-header">
+        <i class="fa-solid fa-clipboard-list"></i> Lịch sử đơn hàng (@Model.Count() đơn)
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-hover mb-0">
+            <thead class="thead-light">
+                <tr>
+                    <th>Mã ĐH</th>
+                    <th>Ngày đặt</th>
+                    <th>Tổng tiền</th>
+                    <th>Trạng thái</th>
+                    <th>Thanh toán</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null && Model.Any())
+                {
+                    foreach (var item in Model.OrderByDescending(o => o.OrderDate))
+                    {
+                        <tr>
+                            <td>#@item.OrderID</td>
+                            <td>@item.OrderDate.ToString("dd/MM/yyyy")</td>
+                            <td style="color:#d70018; font-weight:bold;">@item.TotalAmount.ToString("N0")₫</td>
+                            <td>
+                                <span class="badge-status @(item.PaymentStatus == "Đã thanh toán" ? "bg-success" : "bg-pending")">
+                                    @item.PaymentStatus
+                                </span>
+                            </td>
+                            <td>@item.PaymentMethod</td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="6" class="text-center text-muted py-4">Khách hàng này chưa có đơn hàng nào.</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

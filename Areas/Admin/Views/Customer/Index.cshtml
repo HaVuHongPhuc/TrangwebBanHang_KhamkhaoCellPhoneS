@@ -1,0 +1,89 @@
+﻿@model IEnumerable<TrangwebCellPhoneS.Models.Customer>
+
+@{
+    ViewBag.Title = "Quản lý Khách hàng";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<style>
+    .admin-card {
+        background: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        border-top: 4px solid #007bff; /* Màu xanh dương */
+    }
+
+    .page-title {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        text-transform: uppercase;
+        color: #333;
+    }
+
+    .action-btn {
+        padding: 5px 10px;
+        border-radius: 4px;
+        color: white;
+        text-decoration: none;
+        font-size: 12px;
+    }
+
+    .btn-info-custom {
+        background-color: #17a2b8;
+    }
+
+        .btn-info-custom:hover {
+            background-color: #138496;
+            color: white;
+        }
+</style>
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success ">
+        <i class="fa-solid fa-check-circle"></i> @TempData["SuccessMessage"]
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+<div class="container-fluid" style="padding: 20px;">
+    <div class="admin-card">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2 class="page-title"><i class="fa-solid fa-users"></i> Danh sách Khách hàng</h2>
+        </div>
+
+        <table class="table table-striped table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Họ tên</th>
+                    <th>Số điện thoại</th>
+                    <th>Email</th>
+                    <th>Tên đăng nhập</th>
+                    <th class="text-center">Thao tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td style="font-weight:500">@item.CustomerName</td>
+                        <td>@item.CustomerPhone</td>
+                        <td>@item.CustomerEmail</td>
+                        <td>
+                            <span style="background:#eef; padding:3px 8px; border-radius:4px; color:#555; font-size:12px;">
+                                @item.Username
+                            </span>
+                        </td>
+                        <td class="text-center">
+                            <a href="@Url.Action("Details", new { id = item.CustomerID })" class="action-btn btn-info-custom">
+                                <i class="fa-solid fa-circle-info"></i> Chi tiết
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

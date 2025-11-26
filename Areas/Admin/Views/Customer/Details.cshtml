@@ -1,0 +1,92 @@
+﻿@model TrangwebCellPhoneS.Models.Customer
+
+@{
+    ViewBag.Title = "Chi tiết Khách hàng";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<style>
+    .detail-card {
+        background: #fff;
+        padding: 25px;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        margin-bottom: 20px;
+    }
+
+    .info-row {
+        border-bottom: 1px dashed #eee;
+        padding: 10px 0;
+        display: flex;
+    }
+
+    .info-label {
+        width: 150px;
+        font-weight: bold;
+        color: #666;
+    }
+
+    .info-value {
+        flex: 1;
+        color: #333;
+        font-weight: 500;
+    }
+
+    .btn-back {
+        background-color: #6c757d;
+        color: white;
+        padding: 8px 20px;
+        border-radius: 4px;
+        text-decoration: none;
+        display: inline-block;
+        margin-top: 20px;
+    }
+
+        .btn-back:hover {
+            background-color: #5a6268;
+            color: white;
+        }
+</style>
+
+<div class="container-fluid" style="padding: 20px;">
+
+    <div class="detail-card">
+        <h3 style="margin-top:0; margin-bottom:20px; font-weight:bold; color:#007bff;">
+            <i class="fa-solid fa-user-tag"></i> Thông tin Khách hàng
+        </h3>
+
+        <div class="info-row">
+            <span class="info-label">Họ và tên:</span>
+            <span class="info-value">@Model.CustomerName</span>
+        </div>
+        <div class="info-row">
+            <span class="info-label">Số điện thoại:</span>
+            <span class="info-value">@Model.CustomerPhone</span>
+        </div>
+        <div class="info-row">
+            <span class="info-label">Email:</span>
+            <span class="info-value">@Model.CustomerEmail</span>
+        </div>
+        <div class="info-row">
+            <span class="info-label">Địa chỉ:</span>
+            <span class="info-value">@Model.CustomerAddress</span>
+        </div>
+        <div class="info-row">
+            <span class="info-label">Tài khoản:</span>
+            <span class="info-value">@Model.Username</span>
+        </div>
+        <div class="info-row" style="border-bottom:none;">
+            <span class="info-label">Tổng đơn hàng:</span>
+            <span class="info-value text-danger font-weight-bold">@Model.Orders.Count</span>
+        </div>
+    </div>
+
+    @Html.Partial("_PVOrderList", Model.Orders)
+
+    <div>
+        <a href="@Url.Action("Index")" class="btn-back">
+            <i class="fa-solid fa-arrow-left"></i> Quay lại danh sách
+        </a>
+    </div>
+
+</div>

@@ -1,28 +1,161 @@
 ﻿@model TrangwebCellPhoneS.Models.Category
 
-
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Chi tiết Danh mục";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2 class="bg-success">Trang chi tiết</h2>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-<div>
-    <h4>Danh mục</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.CategoryName)
-        </dt>
+<style>
+    /* --- Khung chứa chính --- */
+    .details-container {
+        background-color: #f4f6f9; /* Nền xám nhẹ */
+        padding: 30px;
+        min-height: 80vh;
+        font-family: 'Segoe UI', sans-serif;
+        display: flex;
+        justify-content: center;
+    }
 
-        <dd>
-            @Html.DisplayFor(model => model.CategoryName)
-        </dd>
+    /* --- Thẻ Card Chi tiết --- */
+    .details-card {
+        background: #fff;
+        width: 100%;
+        max-width: 600px; /* Giới hạn chiều rộng cho đẹp */
+        border-radius: 10px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        overflow: hidden;
+        border-top: 5px solid #17a2b8; /* Viền trên màu xanh Cyan */
+    }
 
-    </dl>
+    /* Header của Card */
+    .card-header {
+        padding: 20px 25px;
+        border-bottom: 1px solid #eee;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .card-title {
+        margin: 0;
+        font-size: 22px;
+        font-weight: 700;
+        color: #333;
+        text-transform: uppercase;
+    }
+
+    /* Body của Card */
+    .card-body {
+        padding: 30px;
+    }
+
+    /* Style cho từng dòng thông tin */
+    .info-row {
+        margin-bottom: 20px;
+        padding-bottom: 15px;
+        border-bottom: 1px dashed #eee;
+    }
+
+        .info-row:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+    .info-label {
+        font-size: 14px;
+        color: #888;
+        font-weight: 600;
+        margin-bottom: 5px;
+        display: block;
+    }
+
+    .info-value {
+        font-size: 18px;
+        color: #333;
+        font-weight: 500;
+    }
+
+    /* --- Footer Card (Nút bấm) --- */
+    .card-footer {
+        padding: 20px;
+        background-color: #f8f9fa;
+        border-top: 1px solid #eee;
+        text-align: right;
+    }
+
+    .btn-action {
+        display: inline-block;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-decoration: none !important;
+        font-weight: 600;
+        font-size: 14px;
+        transition: all 0.3s;
+        margin-left: 10px;
+    }
+
+    .btn-back {
+        background-color: #6c757d; /* Xám */
+        color: white;
+        border: 1px solid #6c757d;
+    }
+
+        .btn-back:hover {
+            background-color: #5a6268;
+            color: white;
+        }
+
+    .btn-edit {
+        background-color: #ffc107; /* Vàng */
+        color: #212529;
+        border: 1px solid #ffc107;
+    }
+
+        .btn-edit:hover {
+            background-color: #e0a800;
+            color: #000;
+        }
+
+    /* Icon trang trí */
+    .category-icon {
+        font-size: 50px;
+        color: #17a2b8;
+        float: right;
+        opacity: 0.2;
+    }
+</style>
+
+<div class="details-container">
+    <div class="details-card">
+
+        <div class="card-header">
+            <h2 class="card-title">Thông tin Danh mục</h2>
+            <i class="fa-solid fa-layer-group" style="font-size: 24px; color: #17a2b8;"></i>
+        </div>
+
+        <div class="card-body">
+            <div class="info-row">
+                <span class="info-label">Mã Danh mục (ID)</span>
+                <span class="info-value">#@Html.DisplayFor(model => model.CategoryID)</span>
+            </div>
+
+            <div class="info-row">
+                <span class="info-label">Tên Danh mục</span>
+                <span class="info-value" style="color: #d70018; font-weight: bold;">
+                    @Html.DisplayFor(model => model.CategoryName)
+                </span>
+            </div>
+        </div>
+
+        <div class="card-footer">
+            <a href="@Url.Action("Index")" class="btn-action btn-back">
+                <i class="fa-solid fa-arrow-left"></i> Quay lại
+            </a>
+            <a href="@Url.Action("Edit", new { id = Model.CategoryID })" class="btn-action btn-edit">
+                <i class="fa-solid fa-pen-to-square"></i> Chỉnh sửa
+            </a>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Chỉnh sửa", "Edit", new { id = Model.CategoryID }, new { @class = "btn btn-primary" }) |
-    @Html.ActionLink("Quay lại danh sách", "Index", new { @class = "btn btn-primary" })
-</p>

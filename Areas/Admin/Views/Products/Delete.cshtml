@@ -1,74 +1,90 @@
 ﻿@model TrangwebCellPhoneS.Models.Product
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Xóa Sản phẩm";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2 class="bg-success">Xóa danh mục</h2>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-<h4 style="color:orangered" class="bg-btn-outline-danger">Bạn có chắc chắn muốn xóa không?</h4>
-<div>
-    <h4>Sản phẩm</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.ProductName)
-        </dt>
+<style>
+    .delete-card {
+        background: #fff;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 0 15px rgba(0,0,0,0.05);
+        max-width: 600px;
+        margin: 50px auto;
+        text-align: center;
+        border-top: 4px solid #dc3545; /* Đỏ */
+    }
 
-        <dd>
-            @Html.DisplayFor(model => model.ProductName)
-        </dd>
+    .delete-info {
+        background: #f8f9fa;
+        padding: 20px;
+        border-radius: 6px;
+        margin: 20px 0;
+        text-align: left;
+        border: 1px dashed #ccc;
+    }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ProductSpecifications)
-        </dt>
+    .info-row {
+        display: flex;
+        margin-bottom: 10px;
+        font-size: 14px;
+    }
 
-        <dd>
-            @Html.DisplayFor(model => model.ProductSpecifications)
-        </dd>
+    .info-label {
+        font-weight: bold;
+        width: 150px;
+        color: #555;
+    }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.outstandingFeatures)
-        </dt>
+    .btn-confirm-delete {
+        background-color: #dc3545;
+        color: white;
+        padding: 10px 30px;
+        border: none;
+        border-radius: 4px;
+        font-weight: bold;
+        cursor: pointer;
+    }
 
-        <dd>
-            @Html.DisplayFor(model => model.outstandingFeatures)
-        </dd>
+        .btn-confirm-delete:hover {
+            background-color: #c82333;
+        }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ProductPrice)
-        </dt>
+    .btn-cancel {
+        color: #6c757d;
+        text-decoration: none;
+        margin-left: 15px;
+        font-size: 14px;
+    }
+</style>
 
-        <dd>
-            @Html.DisplayFor(model => model.ProductPrice)
-        </dd>
+<div class="delete-card">
+    <h3>Xác nhận xóa sản phẩm?</h3>
+    <p class="text-muted">Hành động này không thể hoàn tác. Vui lòng kiểm tra kỹ thông tin dưới đây.</p>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ProductImage)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ProductImage)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Category.CategoryName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Category.CategoryName)
-        </dd>
-
-    </dl>
+    <div class="delete-info">
+        <div class="info-row">
+            <span class="info-label">Tên sản phẩm:</span>
+            <span>@Html.DisplayFor(model => model.ProductName)</span>
+        </div>
+        <div class="info-row">
+            <span class="info-label">Danh mục:</span>
+            <span>@Html.DisplayFor(model => model.Category.CategoryName)</span>
+        </div>
+        <div class="info-row">
+            <span class="info-label">Giá bán:</span>
+            <span style="color:red; font-weight:bold;">@Html.DisplayFor(model => model.ProductPrice)</span>
+        </div>
+    </div>
 
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
-        </div>
+        <input type="submit" value="Xóa vĩnh viễn" class="btn-confirm-delete" />
+        @Html.ActionLink("Hủy bỏ", "Index", null, new { @class = "btn-cancel" })
     }
 </div>
