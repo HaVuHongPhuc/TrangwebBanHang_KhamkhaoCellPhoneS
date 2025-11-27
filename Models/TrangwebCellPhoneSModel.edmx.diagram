@@ -6,12 +6,12 @@
     <edmx:Diagrams>
       <Diagram DiagramId="e624c3c1797544e4a3b7056eab43fd6d" Name="Diagram1">
         <EntityTypeShape EntityType="TrangwebCellPhoneSModel.Category" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="TrangwebCellPhoneSModel.Customer" Width="1.5" PointX="9.375" PointY="4.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="TrangwebCellPhoneSModel.Order" Width="1.5" PointX="6.25" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TrangwebCellPhoneSModel.Customer" Width="1.5" PointX="9.25" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TrangwebCellPhoneSModel.Order" Width="1.5" PointX="7.375" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="TrangwebCellPhoneSModel.OrderDetail" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="TrangwebCellPhoneSModel.Product" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="TrangwebCellPhoneSModel.sysdiagram" Width="1.5" PointX="8.25" PointY="1.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="TrangwebCellPhoneSModel.User" Width="1.5" PointX="10.5" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TrangwebCellPhoneSModel.sysdiagram" Width="1.5" PointX="1.625" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TrangwebCellPhoneSModel.User" Width="1.5" PointX="11" PointY="1.75" IsExpanded="true" />
         <AssociationConnector Association="TrangwebCellPhoneSModel.FK_Pro_Category" ManuallyRouted="false" />
         <AssociationConnector Association="TrangwebCellPhoneSModel.FK__Order__CustomerI__412EB0B6" ManuallyRouted="false" />
         <AssociationConnector Association="TrangwebCellPhoneSModel.FK_User_Customer" ManuallyRouted="false" />

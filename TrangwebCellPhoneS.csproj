@@ -186,9 +186,9 @@
       <DependentUpon>TrangwebCellPhoneSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ViewModel\AdminUserVM.cs" />
-    <Compile Include="Models\ViewModel\Cart.cs" />
-    <Compile Include="Models\ViewModel\CartItem.cs" />
-    <Compile Include="Models\ViewModel\CartService.cs" />
+    <Compile Include="Models\Cart.cs" />
+    <Compile Include="Models\CartItem.cs" />
+    <Compile Include="Models\CartService.cs" />
     <Compile Include="Models\ViewModel\CheckoutVM.cs" />
     <Compile Include="Models\ViewModel\HomeProductVM.cs" />
     <Compile Include="Models\ViewModel\LoginVM.cs" />
@@ -263,7 +263,6 @@
     <Content Include="Areas\Admin\Views\Products\PartialView_CreateEditProducts.cshtml" />
     <Content Include="Areas\Admin\Views\Default\Index.cshtml" />
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\Products\PVListProduct.cshtml" />
     <Content Include="Areas\Admin\Views\User\Index.cshtml" />
     <Content Include="Areas\Admin\Views\User\Create.cshtml" />
@@ -320,8 +319,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Areas\Admin\Views\Khohang\" />
-    <Folder Include="Views\AdminUserVM\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />

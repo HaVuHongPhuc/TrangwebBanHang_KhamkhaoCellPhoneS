@@ -6,31 +6,52 @@
     <title>@ViewBag.Title - QUẢN TRỊ WEBSITE</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+
+    <style>
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .nav-link {
+            color: ghostwhite !important;
+            font-weight: 500;
+        }
+
+            .nav-link:hover {
+                color: ghostwhite !important;
+                font-weight: bold;
+            }
+    </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark" style="background-color: red;">
         <div class="container">
-            @Html.ActionLink("CellPhoneSSSS", "Index", "Admin/Default", new { area = "" }, new { @class = "navbar-brand" })
+            @Html.ActionLink("CellPhoneS Admin", "Index", "Default", new { area = "Admin" }, new { @class = "navbar-brand" })
+
             <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+
             <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav flex-grow-1">
-                    <li>@Html.ActionLink("Quản lý danh mục", "Index", "Admin/Categories", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Quản lý sản phẩm", "Index", "Admin/Products", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Quản lý người dùng", "Index", "Admin/User", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Quản lý khách hàng", "Index", "Admin/Customer", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Quản lý đơn hàng", "Index", "Admin/OrderList", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Quản lý danh mục", "Index", "Categories", new { area = "Admin" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Quản lý sản phẩm", "Index", "Products", new { area = "Admin" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Quản lý người dùng", "Index", "User", new { area = "Admin" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Quản lý khách hàng", "Index", "Customer", new { area = "Admin" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Quản lý đơn hàng", "Index", "OrderList", new { area = "Admin" }, new { @class = "nav-link" })</li>
+
                 </ul>
             </div>
         </div>
     </nav>
+
     <div class="container body-content">
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - CellPhoneS</p>
+            <p>&copy; @DateTime.Now.Year - Hệ thống quản trị CellPhoneS</p>
         </footer>
     </div>
 
