@@ -6,16 +6,9 @@
 }
 
 <style>
-    /* 1. Tạo nền xám nhẹ cho vùng chứa chính để làm nổi bật bảng dữ liệu */
-    .admin-content-wrapper {
-        background-color: #f4f6f9;
-        padding: 20px;
-        border-radius: 8px;
-    }
 
     /* 2. Thiết kế Khung chứa (Card) màu trắng, đổ bóng nhẹ */
     .admin-card {
-        background-color: #ffffff;
         border-radius: 8px;
         box-shadow: 0 0 15px rgba(0,0,0,0.05); /* Bóng mờ nhẹ */
         padding: 25px;
@@ -47,7 +40,7 @@
     }
 
         .custom-table thead th {
-            background-color: #343a40; /* Màu nền tiêu đề bảng tối màu */
+            background-color: black;
             color: #fff;
             padding: 12px;
             text-align: left;
@@ -62,9 +55,7 @@
             vertical-align: middle;
         }
 
-        .custom-table tbody tr:hover {
-            background-color: #f8f9fa; /* Hiệu ứng hover dòng */
-        }
+
 
     /* 5. Tùy chỉnh các nút bấm (Action Buttons) */
     .btn-action {
@@ -117,24 +108,11 @@
         border-radius: 4px;
         text-decoration: none;
         font-weight: bold;
-        box-shadow: 0 2px 5px rgba(40, 167, 69, 0.3);
     }
 
-        .btn-add-new:hover {
-            background-color: #218838;
-            color: white;
-            text-decoration: none;
-        }
-
-    /* Alert */
-    .alert-custom {
-        border-radius: 4px;
-        padding: 10px 15px;
-        margin-bottom: 20px;
-    }
 </style>
 
-<div class="admin-content-wrapper">
+<div>
     @if (TempData["ErrorMessage"] != null)
     {
         <div class="alert alert-danger alert-custom">

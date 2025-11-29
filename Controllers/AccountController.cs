@@ -80,8 +80,6 @@ namespace TrangwebCellPhoneS.Controllers
                                                       && u.UserRole == "customer");
                 if (user != null)
                 {
-                    // === CODE MỚI BẮT ĐẦU TỪ ĐÂY ===
-
                     // 1. Lấy thông tin khách hàng từ username
                     var customer = db.Customers.SingleOrDefault(c => c.Username == user.Username);
 

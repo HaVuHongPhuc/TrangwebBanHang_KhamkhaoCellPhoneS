@@ -13,10 +13,6 @@ namespace TrangwebCellPhoneS.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult CusInf()
-        {
-            return View();
-        }
         private TrangwebCellPhoneSEntities db = new TrangwebCellPhoneSEntities();
         public ActionResult Index(string searchTerm, int? page)
         {

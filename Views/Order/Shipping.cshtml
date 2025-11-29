@@ -24,6 +24,7 @@
         <div class="form-group">
             <label>Số điện thoại</label>
             @Html.TextBoxFor(m => m.ConsigneePhone, new { placeholder = "Nhập số điện thoại", required = "required" })
+            @Html.ValidationMessageFor(m => m.ConsigneePhone, "", new {@class = "text-danger"})
         </div>
 
         <div class="form-group">

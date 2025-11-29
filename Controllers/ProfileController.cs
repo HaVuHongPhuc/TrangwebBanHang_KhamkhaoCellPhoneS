@@ -28,7 +28,6 @@ namespace TrangwebCellPhoneS.Controllers
 
 
                 CustomerPhone = customer.CustomerPhone,
-                CustomerBirthday = customer.Birthday, 
                 CustomerGender = customer.Gender,    
             };
 
@@ -52,8 +51,6 @@ namespace TrangwebCellPhoneS.Controllers
                     customer.CustomerPhone = model.CustomerPhone;
                     customer.CustomerEmail = model.CustomerEmail;
                     customer.CustomerAddress = model.CustomerAddress;
-
-                    customer.Birthday = model.CustomerBirthday; // VM là CustomerBirthday -> DB là BirthDate
                     customer.Gender = model.CustomerGender;    // VM là CustomerGender -> DB là Gender
 
                     // 2. Lưu xuống SQL

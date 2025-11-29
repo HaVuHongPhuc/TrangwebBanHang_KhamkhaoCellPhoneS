@@ -4,7 +4,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <style>
-    /* CSS Style giống Tiki */
     .profile-page {
         background-color: #f5f5fa;
         padding: 20px 0;
@@ -18,7 +17,6 @@
         margin: 0 auto;
     }
 
-    /* Sidebar trái */
     .sidebar-profile {
         width: 250px;
         background: transparent;
@@ -75,7 +73,6 @@
         color: #999;
     }
 
-    /* Nội dung phải */
     .main-profile {
         flex: 1;
         background: white;
@@ -196,12 +193,11 @@
                 <img src="https://e7.pngegg.com/pngimages/84/165/png-clipart-united-states-avatar-organization-information-user-avatar-service-computer-wallpaper-thumbnail.png" class="user-avatar-small" />
                 <div class="user-brief-name">
                     Tài khoản của
-                    <strong>@Model.CustomerName</strong>
+                    <strong>@Model.Username</strong>
                 </div>
             </div>
             <ul class="sidebar-menu-list">
                 <li class="active"><a href="#"><i class="fa-solid fa-user sidebar-icon"></i> Thông tin tài khoản</a></li>
-                <li><a href="@Url.Action("OrderHistory", "Order")"><i class="fa-solid fa-box sidebar-icon"></i> Lịch sử đơn hàng</a></li>
             </ul>
         </div>
 
@@ -219,25 +215,26 @@
 
                 <div class="profile-form-row">
                     <div class="profile-left-col">
+                        <div class="form-group-row">
+                            <label class="form-label-profile">Tên đăng nhập</label>
+                            <div class="form-input-box">
+                                @Html.TextBoxFor(m => m.Username, new { @class = "form-control-tiki", @readonly = "readonly", style ="background: lightgrey" })
+                            </div>
+                        </div>
 
                         <div class="form-group-row">
                             <label class="form-label-profile">Họ và tên</label>
                             <div class="form-input-box">
-                                @Html.TextBoxFor(m => m.CustomerName, new { @class = "form-control-tiki", @readonly = "readonly", @style = "background:#f5f5f5" })
+                                @Html.TextBoxFor(m => m.CustomerName, new { @class = "form-control-tiki" })
+                                @Html.ValidationMessageFor(m => m.CustomerName, "", new {@class = "text-danger"})
                             </div>
                         </div>
-                        <div class="form-group-row">
-                            <label class="form-label-profile">Nickname</label>
-                            <div class="form-input-box">
-                                @Html.TextBoxFor(m => m.Username, new { @class = "form-control-tiki" })
-                            </div>
-                        </div>
-
 
                         <div class="form-group-row">
                             <label class="form-label-profile">Số điện thoại</label>
                             <div class="form-input-box">
                                 @Html.TextBoxFor(m => m.CustomerPhone, new { @class = "form-control-tiki", @id = "CustomerPhone" })
+                                @Html.ValidationMessageFor(m => m.CustomerPhone,"", new {@class = "text-danger"})
                             </div>
                         </div>
 
@@ -245,19 +242,12 @@
                             <label class="form-label-profile">Email</label>
                             <div class="form-input-box">
                                 @Html.TextBoxFor(m => m.CustomerEmail, new { @class = "form-control-tiki", @id = "CustomerEmail" })
-                            </div>
-                        </div>
-
-                        <div class="form-group-row">
-                            <label class="form-label-profile">Ngày sinh</label>
-                            <div class="form-input-box">
-                                @Html.TextBoxFor(m => m.CustomerBirthday, "{0:yyyy-MM-dd}", new { @class = "form-control-tiki", @type = "date" })
+                                @Html.ValidationMessageFor(m => m.CustomerEmail,"", new {@class = "text-danger"}) 
                             </div>
                         </div>
                         <div class="form-group-row">
                             <label class="form-label-profile">Giới tính</label>
                             <div class="form-input-box">
-                                @* Sử dụng DropDownListFor thay vì RadioButton *@
                                 @Html.DropDownListFor(m => m.CustomerGender, new List<SelectListItem>
                                 {
                                     new SelectListItem { Text = "Nam", Value = "Nam" },
@@ -268,7 +258,7 @@
 
                             </div>
                         </div>
-                       <div class="form-group-row">
+                        <div class="form-group-row">
                             <label class="form-label-profile"></label>
                             <button type="submit" class="btn-save">Lưu thay đổi</button>
                         </div>
@@ -285,7 +275,6 @@
                                     @Model.CustomerPhone
                                 </div>
                             </div>
-                            <button type="button" class="btn-update" onclick="document.getElementById('CustomerPhone').focus()">Cập nhật</button>
                         </div>
 
                         <div class="info-item">
@@ -296,7 +285,6 @@
                                     @(string.IsNullOrEmpty(Model.CustomerEmail) ? "Chưa cập nhật" : Model.CustomerEmail)
                                 </div>
                             </div>
-                            <button type="button" class="btn-update" onclick="document.getElementById('CustomerEmail').focus()">Cập nhật</button>
                         </div>                       
                     </div>
                 </div>
