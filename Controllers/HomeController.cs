@@ -32,19 +32,19 @@ namespace TrangwebCellPhoneS.Controllers
             model.MobileProducts = products
                 .Where(p => p.CategoryID == 3)
                 .OrderByDescending(p => p.OrderDetails.Count)
-                .Take(6).ToList();
+                .Take(5).ToList(); //lấy số sản phẩm
 
             // 2. LẤY LAPTOP (Thay số 2 bằng ID thật của bạn)
             model.LaptopProducts = products
                 .Where(p => p.CategoryID == 1)
                 .OrderByDescending(p => p.OrderDetails.Count)
-                .Take(6).ToList();
+                .Take(5).ToList();
 
             // 3. LẤY ÂM THANH (Thay số 3 bằng ID thật của bạn)
             model.AudioProducts = products
                 .Where(p => p.CategoryID == 2)
                 .OrderByDescending(p => p.OrderDetails.Count)
-                .Take(6).ToList();
+                .Take(5).ToList();
 
             //Đoạn code liên quan tới phân trang
             //Lấy số trang hiện tại (mặc định là trang 1 nếu không có giá trị)

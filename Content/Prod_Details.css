@@ -1,0 +1,312 @@
+﻿﻿
+.home-hero-section {
+    display:flex;
+    justify-content:center;
+}
+
+.main {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+    background-color: #fff;
+}
+
+/* 1. Khung bao ngoài */
+.product-detail {
+    display: flex;
+    gap: 30px; /* Giảm khoảng cách giữa 2 cột xuống chút cho gọn */
+    margin-bottom: 30px;
+    align-items: flex-start;
+}
+
+/* 2. Cột Trái (Ảnh): Tăng độ rộng lên 45% -> Cột phải sẽ còn 55% */
+.product-left {
+    flex: 0 0 45%; /* Tăng từ 42% lên 45% để ảnh to hơn */
+    max-width: 45%;
+    position: sticky;
+    top: 80px;
+    height: fit-content;
+}
+
+/* 3. Cột Phải (Thông tin): Tự động co lại và thêm đệm phải */
+.product-right {
+    flex: 1;
+    /* Thêm dòng này để nội dung thụt vào, không bị tràn lề */
+    padding-right: 15px;
+}
+
+/* 4. Đảm bảo Banner luôn nằm gọn trong khung */
+.promo-banner img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    display: block;
+}
+
+/* 5. Tinh chỉnh lại khung Tính năng nổi bật (để nó gọn gàng dưới ảnh) */
+.highlight-box {
+    background: #fff;
+    border: 1px solid #d70018; /* Viền đỏ thay vì nền đỏ đặc */
+    color: #333; /* Chữ đen cho dễ đọc */
+    border-radius: 10px;
+    padding: 15px;
+    overflow: hidden;
+}
+
+    .highlight-box h3 {
+        color: #d70018;
+        background: #fef2f2;
+        margin: -15px -15px 15px -15px;
+        padding: 10px 15px;
+        font-size: 16px;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .highlight-box ul {
+        padding-left: 20px;
+        margin-bottom: 0;
+    }
+
+    .highlight-box li {
+        margin-bottom: 5px;
+    }
+
+.product-right h2 {
+    font-size: 24px;
+    margin-top: 0;
+    line-height: 1.3;
+}
+
+.rating {
+    color: #f59e0b;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.price-box {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin: 15px 0;
+}
+
+.price {
+    color: #d70018;
+    font-size: 28px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.old-price {
+    text-decoration: line-through;
+    color: #888;
+    font-size: 16px;
+}
+
+/* Action Buttons */
+.action-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.btn-buy {
+    flex: 2;
+    background: #d70018;
+    color: white;
+    padding: 15px;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    text-transform: uppercase;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+}
+
+    .btn-buy:hover {
+        background: #c40016;
+        color: white;
+        text-decoration: none;
+    }
+
+.btn-cart {
+    flex: 1;
+    border: 2px solid #d70018;
+    background: white;
+    color: #d70018;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+    .btn-cart i {
+        font-size: 20px;
+        margin-bottom: 5px;
+    }
+
+    .btn-cart:hover {
+        background: #fef2f2;
+        color: #d70018;
+    }
+
+.btn-installment {
+    flex: 1;
+    background: #2f80ed;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 13px;
+    cursor: pointer;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Specs Table */
+.specs-container {
+    margin-top: 30px;
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.specs-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+    .specs-table td {
+        padding: 12px;
+        border-bottom: 1px solid #eee;
+        font-size: 14px;
+    }
+
+    .specs-table tr:last-child td {
+        border-bottom: none;
+    }
+
+    .specs-table td:first-child {
+        font-weight: bold;
+        width: 30%;
+        background: #f9f9f9;
+        color: #555;
+    }
+/* Khung bao ngoài (Viền xanh, nền trắng/xanh nhạt) */
+.promotion-box {
+    border: 1px solid #90cdf9; /* Viền xanh dương nhạt */
+    border-radius: 10px;
+    padding: 15px;
+    background-color: #f0f8ff; /* Nền xanh rất nhạt */
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+/* Tiêu đề: Icon quà + Chữ */
+.promo-header {
+    font-size: 16px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+    .promo-header i {
+        color: #d70018; /* Icon màu đỏ */
+    }
+
+/* Dòng khuyến mãi số 1 */
+.promo-item {
+    display: flex;
+    gap: 10px;
+    font-size: 14px;
+    margin-bottom: 10px;
+    align-items: flex-start;
+}
+
+/* Số 1 tròn màu xanh */
+.promo-number {
+    background-color: #2f80ed;
+    color: white;
+    font-size: 11px;
+    font-weight: bold;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2px;
+}
+
+/* Khung ghi chú màu hồng (Hotsale) */
+.promo-note {
+    background-color: #ffebeb;
+    border-radius: 5px;
+    padding: 8px;
+    font-size: 13px;
+    color: #333;
+}
+
+    .promo-note p {
+        margin-bottom: 5px;
+        line-height: 1.4;
+    }
+
+        .promo-note p:last-child {
+            margin-bottom: 0;
+        }
+
+/* Chữ đỏ đậm */
+.text-red {
+    color: #d70018;
+    font-weight: bold;
+}
+/* Sửa lại Banner cho gọn margin */
+.promo-banner {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+
+.promotion-box {
+    border: 1px solid #90cdf9;
+    border-radius: 8px;
+    padding: 10px;
+    background-color: #f0f8ff;
+    margin-bottom: 15px;
+    font-size: 13px;
+}
+
+/* Thu gọn khoảng cách các dòng trong khuyến mãi */
+.promo-item, .promo-header {
+    margin-bottom: 8px;
+}
+
+/* Nút hành động sát lên trên hơn */
+.action-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+    align-items: stretch;
+}

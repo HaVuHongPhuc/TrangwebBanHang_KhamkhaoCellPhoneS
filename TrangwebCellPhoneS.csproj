@@ -214,9 +214,11 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\Cart.css" />
     <Content Include="Content\CPS_LoginandRegister.css" />
     <Content Include="Content\Layout.css" />
     <Content Include="Content\PagedList.css" />
+    <Content Include="Content\Prod_Details.css" />
     <Content Include="Content\SanPham.css" />
     <Content Include="Content\sanpham.js" />
     <Content Include="Content\Thanhtoan.css" />

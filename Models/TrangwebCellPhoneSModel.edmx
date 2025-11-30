@@ -19,7 +19,7 @@
           <Property Name="CustomerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CustomerName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="CustomerPhone" Type="nvarchar" MaxLength="11" Nullable="false" />
-          <Property Name="CustomerEmail" Type="nvarchar" MaxLength="150" />
+          <Property Name="CustomerEmail" Type="nvarchar" MaxLength="150" Nullable="false" />
           <Property Name="CustomerAddress" Type="nvarchar(max)" />
           <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Gender" Type="nvarchar" MaxLength="20" />
@@ -189,7 +189,7 @@
           <Property Name="CustomerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CustomerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CustomerPhone" Type="String" MaxLength="11" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="CustomerEmail" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerEmail" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CustomerAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Orders" Relationship="Self.FK__Order__CustomerI__412EB0B6" FromRole="Customer" ToRole="Order" />

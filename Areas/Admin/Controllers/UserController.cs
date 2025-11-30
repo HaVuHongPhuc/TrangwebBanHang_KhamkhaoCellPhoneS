@@ -44,8 +44,8 @@ namespace TrangwebCellPhoneS.Areas.Admin.Controllers
                 var user = new User
                 {
                     Username = model.Username,
-                    Password = model.Password, // Lưu ý: Thực tế nên mã hóa mật khẩu ở đây
-                    UserRole = "Admin" // Cố định quyền là Admin
+                    Password = model.Password,
+                    UserRole = "Admin" 
                 };
 
                 db.Users.Add(user);

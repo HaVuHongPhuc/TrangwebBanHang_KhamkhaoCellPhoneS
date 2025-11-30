@@ -2,94 +2,96 @@
 @{
     ViewBag.Title = "Home Page";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    <link rel="stylesheet" type="text/css" href="~/Content/SanPham.css" />
 }
-<div class="container home-hero-section">
+<div class="main">
+    <div class="home-page-first">
 
-    <div class="left-sidebar-column">
+        <div class="left-sidebar-column">
 
-        <div class="sidebar-menu-container">
-            <ul class="sidebar-menu-list">
-                <li>
-                    <a href="@Url.Action("Dienthoai", "Home")">
-                        <div class="menu-icon"><i class="fa-solid fa-mobile-button"></i></div>
-                        <span class="menu-text">Điện thoại</span>
-                        <i class="fa-solid fa-chevron-right arrow-icon"></i>
-                    </a>
-                </li>
-                <li>
-                    <a href="@Url.Action("Laptop", "Home")">
-                        <div class="menu-icon"><i class="fa-solid fa-laptop"></i></div>
-                        <span class="menu-text">Laptop</span>
-                        <i class="fa-solid fa-chevron-right arrow-icon"></i>
-                    </a>
-                </li>
-                <li>
-                    <a href="@Url.Action("AmThanh", "Home")">
-                        <div class="menu-icon"><i class="fa-solid fa-headphones"></i></div>
-                        <span class="menu-text">Âm thanh</span>
-                        <i class="fa-solid fa-chevron-right arrow-icon"></i>
-                    </a>
-                </li>
-            </ul>
+            <div class="sidebar-menu-container">
+                <ul class="sidebar-menu-list">
+                    <li>
+                        <a href="@Url.Action("Dienthoai", "Home")">
+                            <div class="menu-icon"><i class="fa-solid fa-mobile-button"></i></div>
+                            <span class="menu-text">Điện thoại</span>
+                            <i class="fa-solid fa-chevron-right arrow-icon"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Laptop", "Home")">
+                            <div class="menu-icon"><i class="fa-solid fa-laptop"></i></div>
+                            <span class="menu-text">Laptop</span>
+                            <i class="fa-solid fa-chevron-right arrow-icon"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("AmThanh", "Home")">
+                            <div class="menu-icon"><i class="fa-solid fa-headphones"></i></div>
+                            <span class="menu-text">Âm thanh</span>
+                            <i class="fa-solid fa-chevron-right arrow-icon"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="sticky-banner-container">
+                <a>
+                    <img src="https://cdn.hstatic.net/files/200000722513/file/gearvn-laptop-t11-sticky-banner.jpg" alt="Banner Khuyến Mãi" class="sticky-banner-img" />
+                </a>
+            </div>
+
+        </div> <div class="main-banner-container">
+            <div class="banner-main">
+                <img src="https://cdn2.cellphones.com.vn/insecure/rs:fill:690:300/q:90/plain/https://dashboard.cellphones.com.vn/storage/690x300_iPhone_17_Pro_Opensale_v3.png" alt="Banner Chính" />
+            </div>
+
+            <div class="sub-banners">
+                <img src="https://cdn2.cellphones.com.vn/insecure/rs:fill:690:300/q:50/plain/https://dashboard.cellphones.com.vn/storage/Right-S25-FE.png" />
+                <img src="https://cdn2.cellphones.com.vn/insecure/rs:fill:690:300/q:50/plain/https://dashboard.cellphones.com.vn/storage/690x300_RightBanner_ipadprom5_opensale.png" />
+                <img src="https://cdn2.cellphones.com.vn/insecure/rs:fill:690:300/q:50/plain/https://dashboard.cellphones.com.vn/storage/macbook-giao-xa.png" />
+            </div>
         </div>
 
-        <div class="sticky-banner-container">
-            <a href="#">
-                <img src="https://cdn.hstatic.net/files/200000722513/file/gearvn-laptop-t11-sticky-banner.jpg" alt="Banner Khuyến Mãi" class="sticky-banner-img" />
-            </a>
-        </div>
-
-    </div> <div class="main-banner-container">
-        <div class="banner-main">
-            <img src="https://cdn2.cellphones.com.vn/insecure/rs:fill:690:300/q:90/plain/https://dashboard.cellphones.com.vn/storage/690x300_iPhone_17_Pro_Opensale_v3.png" alt="Banner Chính" />
-        </div>
-
-        <div class="sub-banners">
-            <img src="https://cdn2.cellphones.com.vn/insecure/rs:fill:690:300/q:50/plain/https://dashboard.cellphones.com.vn/storage/Right-S25-FE.png" />
-            <img src="https://cdn2.cellphones.com.vn/insecure/rs:fill:690:300/q:50/plain/https://dashboard.cellphones.com.vn/storage/690x300_RightBanner_ipadprom5_opensale.png" />
-            <img src="https://cdn2.cellphones.com.vn/insecure/rs:fill:690:300/q:50/plain/https://dashboard.cellphones.com.vn/storage/macbook-giao-xa.png" />
-        </div>
     </div>
-
-</div>
 
     <hr />
+    <section>
+        @*Sản phẩm nổi bật*@
+        @Html.Partial("_PVFeatureProduct", Model)
 
-    @*Sản phẩm nổi bật*@
-    @Html.Partial("_PVFeatureProduct", Model)
+        @*Sản phẩm mới*@
+        @Html.Partial("_PVNewProduct", Model)
 
-    @*Sản phẩm mới*@
-    @Html.Partial("_PVNewProduct", Model)
-
-    <div class="container" style="margin-top: 30px;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-            <h2 style="font-size: 22px; font-weight: bold; text-transform: uppercase; color: #333; margin: 0;">
-                ĐIỆN THOẠI
-            </h2>
-            <a href="~/Home/Dienthoai" style="font-size: 13px; text-decoration: none; color: #555;">Xem tất cả ></a>
+        <div class="container" style="margin-top: 30px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                <h2 style="font-size: 22px; font-weight: bold; text-transform: uppercase; color: #333; margin: 0;">
+                    ĐIỆN THOẠI
+                </h2>
+                <a href="~/Home/Dienthoai" style="font-size: 13px; text-decoration: none; color: #555;">Xem tất cả ></a>
+            </div>
+            @Html.Partial("_PVdtltnProduct", Model.MobileProducts)
         </div>
-        @Html.Partial("_PVdtltnProduct", Model.MobileProducts)
-    </div>
-
-
-    <div class="container" style="margin-top: 30px;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-            <h2 style="font-size: 22px; font-weight: bold; text-transform: uppercase; color: #333; margin: 0;">
-                LAPTOP
-            </h2>
-            <a href="~/Home/Laptop" style="font-size: 13px; text-decoration: none; color: #555;">Xem tất cả ></a>
+    </section>
+    <section>
+        <div class="container" style="margin-top: 30px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                <h2 style="font-size: 22px; font-weight: bold; text-transform: uppercase; color: #333; margin: 0;">
+                    LAPTOP
+                </h2>
+                <a href="~/Home/Laptop" style="font-size: 13px; text-decoration: none; color: #555;">Xem tất cả ></a>
+            </div>
+            @Html.Partial("_PVdtltnProduct", Model.LaptopProducts)
         </div>
-        @Html.Partial("_PVdtltnProduct", Model.LaptopProducts)
-    </div>
-
-
-    <div class="container" style="margin-top: 30px;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-            <h2 style="font-size: 22px; font-weight: bold; text-transform: uppercase; color: #333; margin: 0;">
-                ÂM THANH
-            </h2>
-            <a href="~/Home/AmThanh" style="font-size: 13px; text-decoration: none; color: #555;">Xem tất cả ></a>
+    </section>
+    <section>
+        <div class="container" style="margin-top: 30px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                <h2 style="font-size: 22px; font-weight: bold; text-transform: uppercase; color: #333; margin: 0;">
+                    ÂM THANH
+                </h2>
+                <a href="~/Home/AmThanh" style="font-size: 13px; text-decoration: none; color: #555;">Xem tất cả ></a>
+            </div>
+            @Html.Partial("_PVdtltnProduct", Model.AudioProducts)
         </div>
-        @Html.Partial("_PVdtltnProduct", Model.AudioProducts)
-    </div>
+    </section>
+</div> 

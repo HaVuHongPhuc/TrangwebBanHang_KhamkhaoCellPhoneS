@@ -1,45 +1,19 @@
-﻿<!DOCTYPE html>
+﻿@{
+    Layout = null;
+    ViewBag.Title = "CellphoneS";
+}
+
+<!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - CellphoneS</title>
-    <link href="~/Content/bootstrap.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/Content/Layout.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-    <style>
-        /* CSS bổ sung để xử lý phần hiển thị User khi đã đăng nhập */
-        .user-info-header {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: white;
-            font-size: 14px;
-        }
-
-            .user-info-header a {
-                color: white;
-                text-decoration: none;
-            }
-
-                .user-info-header a:hover {
-                    text-decoration: underline;
-                }
-
-        body {
-            overflow-x: hidden;
-        }
-
-        main {
-            min-height: 600px;
-            padding-top: 20px;
-        }
-    </style>
 </head>
 <body>
     <header class="header">
-        <div class="headercenter">
             <a style="color:white; text-decoration:none;" href="@Url.Action("Index", "Home")">
                 <h2>Cellphone<strong>S</strong></h2>
             </a>
@@ -82,7 +56,7 @@
             {
                 // TRƯỜNG HỢP ĐÃ ĐĂNG NHẬP
                 <div class="user-info-header">
-                    
+
                     <a href="@Url.Action("Index", "Profile")">
                         <span>Chào, <i class="fa-regular fa-user"></i>  <b>@Session["CustomerName"]</b></span>
                     </a>
@@ -99,7 +73,6 @@
                     Đăng nhập <i class="fa-regular fa-user"></i>
                 </a>
             }
-        </div>
     </header>
 
     <main class="container">
@@ -164,9 +137,5 @@
             </div>
         </div>
     </footer>
-
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
 </body>
 </html>
