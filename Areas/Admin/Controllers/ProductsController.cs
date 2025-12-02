@@ -26,7 +26,8 @@ namespace TrangwebCellPhoneS.Areas.Admin.Controllers
             if (!string.IsNullOrEmpty(searchTerm))
             {   //Tìm kiếm sản phẩm dựa trên từ khóa
                 products = products.Where(p =>
-                p.ProductName.Contains(searchTerm) || p.ProductSpecifications.Contains(searchTerm) || p.outstandingFeatures.Contains(searchTerm) ||
+                p.ProductName.Contains(searchTerm) || p.ProductSpecifications.Contains(searchTerm) || 
+                p.outstandingFeatures.Contains(searchTerm) ||
                 p.Category.CategoryName.Contains(searchTerm));
             }
             //Tìm kiếm sản phẩm dựa trên giá tối thiểu

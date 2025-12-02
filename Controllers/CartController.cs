@@ -65,6 +65,16 @@ namespace MyStore.Controllers
             return RedirectToAction("Index");
         }
 
+        //khi ấn nút mua ngau
+        public ActionResult GoToPay(int id, int quantity =1)
+        {
+            var product = db.Products.Find(id);
+            var cartService = GetCartService();
+            cartService.GetCart().AddItem(product.ProductID, product.ProductImage,
+                    product.ProductName, product.ProductPrice, quantity, product.Category.CategoryName);
+            return RedirectToAction("Index");
+        }
+
         //Xóa sản phẩm khỏi giỏ
         public ActionResult RemoveFromCart(int id)
         {

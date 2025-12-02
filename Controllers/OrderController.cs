@@ -22,7 +22,6 @@ namespace TrangwebCellPhoneS.Controllers
         public ActionResult Checkout()
         {
             var cart = Session["Cart"] as Cart;
-            if (cart == null || !cart.Items.Any()) return RedirectToAction("Index", "Home");
 
              //xác thực người dùng đã đăng nhập chưa, neeus chưa thì chuyển hướng tới trang đăng nhập
             var user = db.Users.SingleOrDefault(u => u.Username == User.Identity.Name );
@@ -33,7 +32,6 @@ namespace TrangwebCellPhoneS.Controllers
 
             // Lấy thông tin giao hàng từ Session ra để hiển thị lại
             var shippingInfo = Session["ShippingInfo"] as CheckoutVM;
-            if (shippingInfo == null) return RedirectToAction("Shipping"); // Nếu chưa nhập thì bắt quay lại
 
             // Gán thêm thông tin giỏ hàng để hiển thị tổng tiền
             shippingInfo.CartItems = cart.Items.ToList();
@@ -62,7 +60,6 @@ namespace TrangwebCellPhoneS.Controllers
             {
                 var cart = Session["Cart"] as Cart;
                 var shippingInfo = Session["ShippingInfo"] as CheckoutVM; // Lấy lại địa chỉ đã lưu
-                if (cart == null) { return RedirectToAction("Index", "Home"); }
 
                 //Nếu người dùng chưa đăng nhập thì sẽ điều hướng tới trang Login
                 var user = db.Users.SingleOrDefault(u => u.Username == User.Identity.Name);
@@ -71,12 +68,6 @@ namespace TrangwebCellPhoneS.Controllers
                 //Nếu khách hàng không khớp với tên đăng nhập, sẽ điều hướng tới trang login
                 var customer = db.Customers.SingleOrDefault(c => c.Username == user.Username);
                 if (customer == null) { return RedirectToAction("Login", "Account"); }
-
-                //Nếu người dùng chọn thanh toán = paypal, sẽ điều hướng tới trang PaymentWithPaypal
-                if (model.PaymentMethod == "Paypal")
-                {
-                    return RedirectToAction("PaymentWithPaypal", "Paypal", model);
-                }
 
                 //Thiết lập paymentstatus dựa trên paymentmethod
                 string paymentStatus = "Chưa thanh toán";

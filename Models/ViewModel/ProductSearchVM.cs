@@ -23,7 +23,6 @@ namespace TrangwebCellPhoneS.Models.ViewModel
 
         //Danh sách sản phẩm đã phân trang
         public PagedList.IPagedList<Product> Products { get; set; }
-        //Danh sách sản phẩm thỏa điều kiện tìm kiếm
-        //Public List<Product> Products { get; set; }
+
     }
 }

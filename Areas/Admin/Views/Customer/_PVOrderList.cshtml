@@ -43,7 +43,6 @@
 
     <div class="table-responsive">
         <table class="table table-hover mb-0">
-            <thead class="thead-light">
                 <tr>
                     <th>Mã ĐH</th>
                     <th>Ngày đặt</th>
@@ -51,8 +50,6 @@
                     <th>Trạng thái</th>
                     <th>Thanh toán</th>
                 </tr>
-            </thead>
-            <tbody>
                 @if (Model != null && Model.Any())
                 {
                     foreach (var item in Model.OrderByDescending(o => o.OrderDate))
@@ -76,7 +73,6 @@
                         <td colspan="6" class="text-center text-muted py-4">Khách hàng này chưa có đơn hàng nào.</td>
                     </tr>
                 }
-            </tbody>
         </table>
     </div>
 </div>

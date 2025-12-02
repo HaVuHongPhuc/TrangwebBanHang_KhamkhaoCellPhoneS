@@ -97,16 +97,11 @@
                             <label class="form-check-label" for="pay-cod">Tiền mặt (COD)</label>
                         </div>
                         <div class="form-check">
-                            @Html.RadioButtonFor(m => m.PaymentMethod, "Paypal", new { @class = "form-check-input", id = "pay-paypal" })
-                            <label class="form-check-label" for="pay-paypal">Paypal</label>
-                        </div>
-                        <div class="form-check">
                             @Html.RadioButtonFor(m => m.PaymentMethod, "Mua trước trả sau", new { @class = "form-check-input", id = "pay-later" })
                             <label class="form-check-label" for="pay-later">Mua trước trả sau</label>
                         </div>
                         @Html.ValidationMessageFor(m => m.PaymentMethod, "", new { @class = "text-danger" })
                     </div>
-                    @Html.ValidationMessageFor(m => m.PaymentMethod, "", new { @class = "text-danger" })
                 </div>
 
                 <hr />
@@ -161,4 +156,3 @@
         });
     </script>
 }
-

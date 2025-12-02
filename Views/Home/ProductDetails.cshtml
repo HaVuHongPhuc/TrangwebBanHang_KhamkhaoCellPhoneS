@@ -50,7 +50,7 @@
                 <div class="promo-content">
                     <div class="promo-item">
                         <span class="promo-number">1</span>
-                        <span>Giảm ngay 15% Tai nghe - Loa khi mua kèm Điện thoại / Laptop <a href="#">Xem chi tiết</a></span>
+                        <span>Giảm ngay 15% Tai nghe - Loa khi mua kèm Điện thoại / Laptop</span>
                     </div>
 
                     <div class="promo-note">
@@ -63,7 +63,7 @@
                 </div>
             </div>
             <div class="action-buttons">
-                <a href="@Url.Action("Shipping", "Order", new { id = Model.product.ProductID, quantity = 1 })" class="btn-buy">
+                <a href="@Url.Action("AddToCart", "Cart", new { id = Model.product.ProductID, quantity = 1 })" class="btn-buy">
                     MUA NGAY <br>
                     <span style="font-size: 12px; font-weight: normal;">(Giao tận nơi hoặc lấy tại cửa hàng)</span>
                 </a>
