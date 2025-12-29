@@ -82,6 +82,15 @@
             margin: 0;
             padding-left: 20px;
         }
+        .form-control-tiki{
+            border-radius:5px;
+            width:380px;
+            height:40px;
+            border-color:gainsboro;
+            display:flex;
+            justify-content:center;
+            align-content:center;
+        }
     </style>
 </head>
 <body>
@@ -108,6 +117,10 @@
                             @Html.TextBoxFor(m => m.CustomerName, new { placeholder = "Nhập họ và tên của bạn", style = "width: 95%;" })
                             @Html.ValidationMessageFor(m => m.CustomerName, "", new { @class = "text-danger" })
                         </td>
+                        <td colspan="2">
+                            <label>Địa chỉ</label><br>
+                            @Html.TextBoxFor(m => m.CustomerAddress, new { placeholder = "Nhập địa chỉ nhận hàng(có thể để trống)", style = "width: 98%;" })
+                        </td>
                     </tr>
                     <tr>
                         <td>
@@ -123,12 +136,6 @@
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <label>Địa chỉ</label><br>
-                            @Html.TextBoxFor(m => m.CustomerAddress, new { placeholder = "Nhập địa chỉ nhận hàng(có thể để trống)", style = "width: 98%;" })
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
                             @Html.DropDownListFor(m => m.CustomerGender, new List<SelectListItem>
                             {
                                 new SelectListItem { Text = "Nam", Value = "Nam" },
@@ -136,6 +143,8 @@
                                 new SelectListItem { Text = "Khác", Value = "Khac" }
                             }, "Chọn giới tính", new { @class = "form-control-tiki" })
                         </td>
+                    </tr>
+                    <tr>
                     </tr>
                 </table>
 

@@ -53,15 +53,23 @@ namespace MyStore.Controllers
         }
 
         //Thêm sản phẩm vào giỏ
-        public ActionResult AddToCart(int id, int quantity = 1)
+        public ActionResult AddToCart(int id, int quantity = 1, bool checkout = false)
         {
             var product = db.Products.Find(id);
             if (product != null)
             {
+                // Thêm sản phẩm vào giỏ hàng
                 var cartService = GetCartService();
                 cartService.GetCart().AddItem(product.ProductID, product.ProductImage,
                     product.ProductName, product.ProductPrice, quantity, product.Category.CategoryName);
             }
+
+            if (checkout)
+            {
+                return RedirectToAction("Shipping","Order");
+            }
+
+            // Mặc định: Chuyển về trang giỏ hàng
             return RedirectToAction("Index");
         }
 

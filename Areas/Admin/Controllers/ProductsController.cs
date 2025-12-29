@@ -100,8 +100,11 @@ namespace TrangwebCellPhoneS.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ProductID,CategoryID,ProductName,ProductSpecifications,outstandingFeatures,ProductPrice,ProductImage")] Product product)
         {
+            bool coSanPham = db.Products.Any(p => p.ProductName == product.ProductName);
+            if (coSanPham) { TempData["ErrorMessage"] = " sản phẩm đã tồn tại"; }
+
             if (ModelState.IsValid)
-            {
+            {                    
                 db.Products.Add(product);
                 db.SaveChanges();
                 return RedirectToAction("Index");

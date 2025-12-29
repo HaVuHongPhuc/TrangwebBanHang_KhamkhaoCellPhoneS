@@ -48,6 +48,12 @@ namespace TrangwebCellPhoneS.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "CategoryID,CategoryName")] Category category)
         {
+            if (string.IsNullOrEmpty(category.CategoryName)) 
+            {
+                ModelState.AddModelError("CategoryName", "Tên danh mục không được để trống.");
+                return View(category);
+            }
+                
             if (db.Categories.Any(c => c.CategoryName == category.CategoryName))
             {
                 // Thêm lỗi vào ModelState. "CategoryName" là tên thuộc tính sẽ hiển thị lỗi bên dưới nó

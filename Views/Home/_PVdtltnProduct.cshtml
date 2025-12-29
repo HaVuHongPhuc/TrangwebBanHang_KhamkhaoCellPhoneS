@@ -96,7 +96,6 @@
     .card-footer-row {
         display: flex;
         justify-content: space-between;
-        align-items: center;
         font-size: 11px;
         color: #777;
         border-top: 1px solid #f0f0f0;
@@ -134,7 +133,12 @@
                 <div class="card-footer-row">
                     <div class="star-rate">
                         <i class="fa-solid fa-star"></i> 5.0
-                        <span style="color:#aaa">(@product.OrderDetails.Count sold)</span>
+                    </div>
+                    <div  class="sold">
+                        <span style="color:#aaa">(@product.OrderDetails.Count Đã bán)</span>
+                    </div>
+                    <div class="wishlist">
+                        Yêu thích <i class="fa-regular fa-heart"></i>
                     </div>
                 </div>
             </div>

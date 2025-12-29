@@ -10,7 +10,7 @@ namespace TrangwebCellPhoneS.Models.ViewModel
     {
         [Display(Name = "Tên đăng nhập")]
         [Required(ErrorMessage = "Vui lòng nhập tên đăng nhập")]
-        [StringLength(50, MinimumLength = 3, ErrorMessage = "Tên đăng nhập phải từ 3 đến 50 ký tự")]
+        [StringLength(50, MinimumLength = 6, ErrorMessage = "Tên đăng nhập phải từ 6 đến 50 ký tự")]
         public string Username { get; set; }
 
         [Display(Name = "Mật khẩu")]

@@ -79,6 +79,7 @@
 /* --- C. BANNER CHÍNH TO --- */
 .main-banner-container {
     flex: 1;
+    padding: 30px;
 }
 
 .banner-main img {

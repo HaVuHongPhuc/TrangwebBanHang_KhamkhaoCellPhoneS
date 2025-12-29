@@ -49,7 +49,7 @@ namespace TrangwebCellPhoneS.Controllers
             //Đoạn code liên quan tới phân trang
             //Lấy số trang hiện tại (mặc định là trang 1 nếu không có giá trị)
             int pageNumber = page ?? 1;
-            int pageSize = 15; //Số sản phẩm mỗi trang
+            int pageSize = 4; //Số sản phẩm mỗi trang
 
             //Láy top 6 sản phẩm bán chạy nhất
             model.FeaturedProducts = products
